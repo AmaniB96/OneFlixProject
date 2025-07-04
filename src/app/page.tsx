@@ -1,3 +1,5 @@
+import Featured from '../component/featured/Featured'
+
 export default function Home() {
   return (
     <>
@@ -39,6 +41,7 @@ export default function Home() {
           />
         </div>
       </div>
+      <Featured/>
     </>
   );
 }

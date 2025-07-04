@@ -3,16 +3,23 @@
     left: 10px;
     top:150px;
     background-color: #232222;
-    height: 65vh;
+    height: 75vh;
     padding: 25px;
     border-radius: 10px;
     padding-top: 150px;
     padding-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
 }
 
 .NavIcon{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 50px;
 }
 

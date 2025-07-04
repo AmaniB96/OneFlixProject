@@ -13,21 +13,25 @@ body{
 }
 
 .MainDiv{
-  width: 90%;
-  height: 65vh;
+  width: 93%;
+  height: 75vh;
   background-color: #232222;
   margin-top: 150px;
   margin-left: 93px;
-
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    95% 100%, 
+    0% 100%)
 }
 
 .video-crop-container {
-  width: 70%;      /* desired crop width */
-  height: 100%;     /* desired crop height */
-  overflow: hidden;  /* hide overflow */
+  width: 70%;      
+  height: 100%;    
+  overflow: hidden;  
   position: relative;
   border-radius: 0;
   display: flex;
@@ -35,10 +39,10 @@ body{
 }
 
 .video-crop {
-  width: 250px;
+  width: 280px;
   height: 100%;
-  object-fit: cover;      /* crop and fill the box */
-  object-position: center; /* center the crop */
+  object-fit: cover;   
+  object-position: center;
   transform: rotate(10deg); 
   scale: 1.3;
 }
