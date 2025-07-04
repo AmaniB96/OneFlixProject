@@ -1,5 +1,5 @@
 .SideNav{
-    position: absolute;
+    position: fixed;
     left: 20px;
     top:150px;
     background-color: #232222;
