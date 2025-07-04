@@ -1,0 +1,27 @@
+.MainNav{
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn{
+    background-color: #FAC402;
+    color: black;
+    padding: 5px;
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.leftNavSide{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.searchInput{
+    background-color: #504C4C;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+}
