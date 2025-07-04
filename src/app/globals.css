@@ -11,3 +11,12 @@ ul{
 body{
   background-color: #2E2C2C;
 }
+
+.MainDiv{
+  width: 90%;
+  height: 75vh;
+  background-color: #232222;
+  margin-top: 150px;
+  margin-left: 93px;
+  border-radius: 10px;
+}

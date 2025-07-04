@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"; 
 import Image from "next/image";
-import logo from "../../assets/logotest-removebg-preview.png";
 import styles from "./splashScreen.module.css";
 
 export default function SplashScreen() {
@@ -18,9 +17,7 @@ export default function SplashScreen() {
 
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            // Autoplay was prevented.
-            // This is an expected behavior, so we can console.log a friendly message
-            // instead of seeing a red error.
+    
             console.log("Audio playback was prevented by the browser's autoplay policy.");
           });
         }
@@ -35,19 +32,37 @@ export default function SplashScreen() {
     <div className={styles.splash}>
       <div className={styles.logoContainer}>
         <div className={styles.logoOriginal}>
-          <Image src={logo} alt="Logo" className={styles.logo} />
+          <Image
+            className={styles.logoOne}
+            src="/assets/logotest-removebg-preview.png"
+            width={80}
+            height={80}
+            alt="Logo"
+          />
           <h1 className={styles.title}>Oneflix</h1>
         </div>
 
         <div className={styles.logoTop}>
-          <Image src={logo} alt="Logo" className={styles.logo} />
+          <Image
+            className={styles.logoOne}
+            src="/assets/logotest-removebg-preview.png"
+            width={80}
+            height={80}
+            alt="Logo"
+          />
           <h1 className={styles.title}>
             <span>One</span>flix
           </h1>
         </div>
 
         <div className={styles.logoBottom}>
-          <Image src={logo} alt="Logo" className={styles.logo} />
+          <Image
+            className={styles.logoOne}
+            src="/assets/logotest-removebg-preview.png"
+            width={80}
+            height={80}
+            alt="Logo"
+          />
           <h1 className={styles.title}>
             <span>One</span>flix
           </h1>
