@@ -6,14 +6,12 @@ export default function FilterSection() {
     return(
         <div className={styles.FilterSection}>
 
-          <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardImageWrapper}>
                 <Image 
                   src="/assets/snk.jpg" 
                   alt="Anime title"
-                  width={180}
-                  height={250}
+                  fill
                   className={styles.cardImage}
                 />
                 <div className={styles.cardOverlay}>
@@ -36,7 +34,6 @@ export default function FilterSection() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
     )
 }

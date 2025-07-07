@@ -1,20 +1,5 @@
-.FilterSection{
-  height: 72vh;
-    margin-left: 150px;
-    color: white;
-    box-sizing: border-box;
-    font-family: "Manrope"
-}
-
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px 0;
-}
-
 .card {
-  width: 180px;
+  width: 400px;
   background-color: #1a1a1a;
   border-radius: 8px;
   overflow: hidden;
@@ -28,7 +13,7 @@
 
 .cardImageWrapper {
   position: relative;
-  height: 250px;
+  height: 180px;
 }
 
 .cardImage {
