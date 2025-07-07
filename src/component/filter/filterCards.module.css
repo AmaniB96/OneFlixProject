@@ -1,0 +1,115 @@
+.FilterSection{
+  height: 72vh;
+    margin-left: 150px;
+    color: white;
+    box-sizing: border-box;
+    font-family: "Manrope"
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.card {
+  width: 180px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cardImageWrapper {
+  position: relative;
+  height: 250px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cardImageWrapper:hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardRating {
+  color: #FAC402;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardButton {
+  background-color: #FAC402;
+  color: #232222;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cardButton:hover {
+  transform: scale(1.05);
+}
+
+.cardInfo {
+  padding: 12px;
+}
+
+.cardTitle {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  color: #999;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.cardTags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #333;
+  color: #ccc;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}

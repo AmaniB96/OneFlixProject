@@ -17,7 +17,7 @@
 
 .img {
   transition: transform 0.3s ease-out;
-  filter: brightness(70%);
+  filter: brightness(60%);
 }
 
 .Featured::before,
@@ -83,7 +83,7 @@
   background-color: #FAC402; 
   color: #232222;
   border: none;
-  padding: 0.8rem 2rem;
+  padding: 0.5rem 1rem;
   font-size: 1.2rem;
   font-weight: 600;
   border-radius: 4px;
@@ -97,4 +97,42 @@
   background-color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.rate{
+  background-color: #FAC402; 
+  color: #232222;
+  border: none;
+  padding: 0.7rem 0.8rem;
+  font-size: 01rem;
+  font-weight: 200;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rate i{
+    width: 100%;
+    text-align: end;
+    margin-left: 40px;
+    margin-right: 0;
+    height: 15px;
+    width: 15px;
+}
+
+.btnDiv{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.addBtn{
+    color: #FAC402;
+    background-color: transparent;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 3.5px solid #FAC402;
+    cursor: pointer;
 }

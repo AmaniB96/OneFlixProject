@@ -1,10 +1,9 @@
 import Featured from '../component/featured/Featured'
+import FilterSection from '../component/filter/FilterCards'
 
 export default function Home() {
   return (
     <>
-      
-
       <div className="MainDiv" >
         <div className="heroText">
           <h1>
@@ -46,6 +45,20 @@ export default function Home() {
         </div>
       </div>
       <Featured/>
+
+      <div className='filterSection'>
+        <div className="filterTitle">
+            <h4>Genres</h4>
+          </div>
+          <div className="Cat">
+            <h5>Categories</h5>
+          </div>
+          <div className="CatTitle">
+            <h5>All</h5>
+          </div>
+      </div>
+           
+      <FilterSection/>
     </>
   );
 }

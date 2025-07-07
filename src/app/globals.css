@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 ul{
     list-style: none;
 }
@@ -10,6 +12,8 @@ ul{
 
 body{
   background-color: #2E2C2C;
+  font-family: "Manrope";
+  color: white;
 }
 
 .MainDiv{
@@ -120,4 +124,30 @@ h1 {
     margin-top: 70px;
     font-size: 15px;
     font-weight: bold;
+}
+
+
+.filterTitle{
+ font-size: 35px;
+ margin-bottom: 20px;
+
+}
+
+.Cat{
+ font-size: 25px;
+ margin-bottom: 10px;
+
+}
+
+.CatTitle{
+ font-size: 20px;
+}
+
+.filterSection{
+   margin-left: 150px;
+   padding-top: 120px;
+   color: white;
+   box-sizing: border-box;
+   font-family: "Manrope";
+   margin-bottom: 20px;
 }

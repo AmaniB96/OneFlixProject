@@ -18,20 +18,16 @@ export default function Featured() {
             
             if (!featuredElement) return
             
-            // Calculate how far the featured section is from the viewport top
             const featuredOffset = featuredElement.getBoundingClientRect().top
             const distanceToViewport = featuredOffset - viewportHeight
             
-            // Parallax effect when approaching the section
             if (featuredOffset < viewportHeight && featuredOffset > -viewportHeight) {
-                // Image parallax (moves slower than scroll)
                 if (imageElement) {
                     const translateY = featuredOffset * 0.2
                     const scale = 1 + Math.min(0.2, Math.max(0, (viewportHeight - featuredOffset) / (viewportHeight * 4)))
                     imageElement.style.transform = `translateY(${translateY}px) scale(${scale})`
                 }
                 
-                // Content parallax (rises up as you scroll to it)
                 if (contentElement) {
                     const opacity = Math.min(1, Math.max(0, 1 - (featuredOffset / (viewportHeight * 0.5))))
                     const translateY = Math.max(0, featuredOffset * 0.4)
@@ -42,7 +38,7 @@ export default function Featured() {
         }
         
         window.addEventListener('scroll', handleScroll)
-        handleScroll() // Initial call
+        handleScroll()
         
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
@@ -68,7 +64,12 @@ export default function Featured() {
                     to turn his sister Nezuko back to human form after their family 
                     is slaughtered in this epic anime series.
                 </p>
-                <button className={styles.buyButton}>Buy Now</button>
+                <div className={styles.btnDiv}>
+                    <button className={styles.buyButton}>Buy Now</button>
+                    <button className={styles.rate}><i className="fa-solid fa-star"></i></button>
+                    <button className={styles.addBtn}><i className="fa-solid fa-plus"></i></button>
+                </div>
+                
             </div>
         </div>
     )
