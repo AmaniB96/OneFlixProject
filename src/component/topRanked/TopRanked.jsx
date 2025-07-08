@@ -34,11 +34,11 @@ export default async function TopRanked() {
             <div className={styles.AllTimeBest}>
                 <p className={styles.AllTimeTitle}>All time best animes</p>
                 <ul className={styles.bestAnimeCont}>
-                    <div className={styles.bestAnimeDiv}>1. Test</div>
-                    <div className={styles.bestAnimeDiv}>2. Test</div>
-                    <div className={styles.bestAnimeDiv}>3. Test</div>
-                    <div className={styles.bestAnimeDiv}>4. Test</div>
-                    <div className={styles.bestAnimeDiv}>5. test</div>
+                    <div className={`${styles.bestAnimeDiv} ${styles.yuyu}`}>1. Yu Yu Hakusho</div>
+                    <div className={`${styles.bestAnimeDiv} ${styles.fma}`}>2. Fullmetal Alchemist: Brotherhood</div>
+                    <div className={`${styles.bestAnimeDiv} ${styles.op}`}>3. One Piece</div>
+                    <div className={`${styles.bestAnimeDiv} ${styles.naruto}`}>4. Naruto</div>
+                    <div className={`${styles.bestAnimeDiv} ${styles.hxh}`}>5. Hunter x Hunter</div>
                 </ul>
             </div>
         </section>

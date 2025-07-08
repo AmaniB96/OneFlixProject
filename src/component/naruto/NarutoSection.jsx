@@ -1,8 +1,24 @@
 import Image from "next/image"
 import styles from './narutoSection.module.css'
 
-export default function NarutoSection() {
+export default async function NarutoSection() {
 
+    const res = await fetch('https://api.jikan.moe/v4/anime/20/episodes')
+    const data = await res.json()
+    const filtered = data.data?.filter(ep => ep.score > 4.50) || [];
+    const topNaruto1 = filtered.slice(0, 5);
+    const topNaruto2 = filtered.slice(5, 10);
+
+    const resImg= await fetch("https://api.jikan.moe/v4/anime/20/pictures")
+    const dataImg= await resImg.json()
+    const narutoImg = Array.isArray(dataImg.data)
+                    ? dataImg.data.map(img => img.webp.large_image_url).slice(0, 5)
+                    : [];
+                    const narutoImg2 = Array.isArray(dataImg.data)
+                    ? dataImg.data.map(img => img.webp.large_image_url).slice(5, 10)
+                    : [];
+
+  console.log(dataImg);
 
     return(
         <>
@@ -14,111 +30,48 @@ export default function NarutoSection() {
                     
                     <div className={styles.narutoCardSection}>
                         <div className={styles.narutoCardDisplay}>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>1</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>2</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>3</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>                                
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>4</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>5</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
+                            {topNaruto1.map((element, index) => {
+                                const imgSrc = narutoImg[index];
+                                return (
+                                    <div key={index} className={styles.narutoCard}>
+                                    {imgSrc ? (
+                                        <Image src={imgSrc} alt="Naruto" fill className={styles.cardImage} />
+                                    ) : (
+                                        <Image src='/assets/naruto.jpg' alt="Naruto" fill className={styles.cardImage} />
+                                    )}
+                                    <span className={styles.rank}>{index + 1}</span>
+                                    <div className={styles.hoverContent}>
+                                        <h4>{element.title}</h4>
+                                        <p>{element.mal_id}</p>
+                                        <p style={{ textAlign: 'end' }}>{element.score}</p>
+                                        <button className={styles.watchBtn}>Buy Now</button>
+                                    </div>
+                                    </div>
+                                );
+                                })}
                         </div>
 
                         <div className={styles.narutoCardDisplay}>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>6</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>7</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>8</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>                                
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>9</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
-                            <div className={styles.narutoCard}>
-                                <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                                <span className={styles.rank}>10</span>
-                                <div className={styles.hoverContent}>
-                                    <h4>Attack on Titan</h4>
-                                    <p>Action • Dark Fantasy</p>
-                                    <p style={{textAlign:'end'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
-                                </div>
-                            </div>
+                            {topNaruto2.map((element, index) => {
+                                const imgSrc1 = narutoImg2[index];
+                                return (
+                                    <div key={index} className={styles.narutoCard}>
+                                    {imgSrc1 ? (
+                                        <Image src={imgSrc1} alt="Naruto" fill className={styles.cardImage} />
+                                    ) : (
+                                        <Image src='/assets/naruto.jpg' alt="Naruto" fill className={styles.cardImage} />
+                                    )}
+                                    <span className={styles.rank}>{index + 6}</span>
+                                    <div className={styles.hoverContent}>
+                                        <h4>{element.title}</h4>
+                                        <p>{element.mal_id}</p>
+                                        <p style={{ textAlign: 'end' }}>{element.score}</p>
+                                        <button className={styles.watchBtn}>Buy Now</button>
+                                    </div>
+                                    </div>
+                                );
+                                })}
                         </div>
-
                     </div>
                 </div>
             </section>

@@ -115,4 +115,65 @@
     padding: 20px;
 }
 
+.bestAnimeDiv {
+  transition: background 0.4s, color 0.4s;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 16px 24px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
 
+.yuyu{
+background: url('/assets/yuyu.jpg') center/cover no-repeat;
+opacity: 0.5;
+}
+
+.yuyu:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.fma{
+  background: url('/assets/fma1.png') center/cover no-repeat;
+  opacity: 0.5;
+}
+
+.fma:hover {
+opacity: 1;  
+color: #fff;
+}
+
+.op{
+  background: url('/assets/op.jpg') center/cover no-repeat;
+  opacity: 0.5;
+}
+
+.op:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.naruto{
+background: url('/assets/naruto.jpg') center/cover no-repeat;
+opacity: 0.5;
+}
+
+.naruto:hover {
+opacity: 1;  
+color: #fff;
+}
+
+.hxh{
+  background: url('/assets/hxh.jpg') center/cover no-repeat;
+  opacity: 0.5;
+}
+
+.hxh:hover {
+  opacity: 1;
+  color: #fff;
+}

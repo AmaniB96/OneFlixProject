@@ -6,7 +6,7 @@ export default async function LatestAnime() {
 
     const res = await fetch('https://api.jikan.moe/v4/seasons/now')
     const data = await res.json()
-    const latestAnime= data.data?.slice(5,10) || [];
+    const latestAnime= data.data?.slice(6,11) || [];
 
     return(
         <>
@@ -19,7 +19,7 @@ export default async function LatestAnime() {
                     <div className={styles.latestCardDisplay}>
                     {latestAnime.map((element,index) => (
                         
-                            <div className={styles.latestCard}>
+                            <div key={index} className={styles.latestCard}>
                                 <Image src={element.images.webp.large_image_url} alt='SNK' fill className={styles.cardImage}/>
                                 <span className={styles.rank}>{index+1}</span>
                                 <div className={styles.hoverContent}>
