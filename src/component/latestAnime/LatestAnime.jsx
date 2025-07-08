@@ -2,7 +2,11 @@ import Image from "next/image"
 import styles from './latestAnime.module.css'
 
 
-export default function LatestAnime() {
+export default async function LatestAnime() {
+
+    const res = await fetch('https://api.jikan.moe/v4/seasons/now')
+    const data = await res.json()
+    const latestAnime= data.data?.slice(5,10) || [];
 
     return(
         <>
@@ -13,57 +17,20 @@ export default function LatestAnime() {
                     </div>
 
                     <div className={styles.latestCardDisplay}>
-                        <div className={styles.latestCard}>
-                            <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                            <span className={styles.rank}>1</span>
-                            <div className={styles.hoverContent}>
-                                <h4>Attack on Titan</h4>
-                                <p>Action • Dark Fantasy</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                <button className={styles.watchBtn}>Buy Now</button>
+                    {latestAnime.map((element,index) => (
+                        
+                            <div className={styles.latestCard}>
+                                <Image src={element.images.webp.large_image_url} alt='SNK' fill className={styles.cardImage}/>
+                                <span className={styles.rank}>{index+1}</span>
+                                <div className={styles.hoverContent}>
+                                    <h4>{element.title_english}</h4>
+                                    <p>{element.genres[0].name}</p>
+                                    <p>{element.synopsis.length > 120 ? element.synopsis.slice(0, 120) + '...': element.synopsis}</p>
+                                    <button className={styles.watchBtn}>Buy Now</button>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.latestCard}>
-                            <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                            <span className={styles.rank}>2</span>
-                            <div className={styles.hoverContent}>
-                                <h4>Attack on Titan</h4>
-                                <p>Action • Dark Fantasy</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                <button className={styles.watchBtn}>Buy Now</button>
-                            </div>
-                        </div>
-                        <div className={styles.latestCard}>
-                            <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                            <span className={styles.rank}>3</span>
-                            <div className={styles.hoverContent}>
-                                <h4>Attack on Titan</h4>
-                                <p>Action • Dark Fantasy</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>                                
-                                <button className={styles.watchBtn}>Buy Now</button>
-                            </div>
-                        </div>
-                        <div className={styles.latestCard}>
-                            <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                            <span className={styles.rank}>4</span>
-                            <div className={styles.hoverContent}>
-                                <h4>Attack on Titan</h4>
-                                <p>Action • Dark Fantasy</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                <button className={styles.watchBtn}>Buy Now</button>
-                            </div>
-                        </div>
-                        <div className={styles.latestCard}>
-                            <Image src='/assets/snk.jpg' alt='SNK' fill className={styles.cardImage}/>
-                            <span className={styles.rank}>5</span>
-                            <div className={styles.hoverContent}>
-                                <h4>Attack on Titan</h4>
-                                <p>Action • Dark Fantasy</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
-                                <button className={styles.watchBtn}>Buy Now</button>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
+                   </div> 
                 </div>
             </section>
 
