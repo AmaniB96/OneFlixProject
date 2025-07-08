@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SplashScreen from "../component/SplashScreen/SplashScreen";
 import MainNav from "../component/mainnav/MainNav";
 import SideNav from "../component/sidenav/SideNav";
+import Footer from "../component/footer/Footer"
 
 export default function RootClientLayout({ children, geistSans, geistMono }) {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ export default function RootClientLayout({ children, geistSans, geistMono }) {
       <MainNav />
       <SideNav />
       {children}
+      <Footer/>
     </body>
   );
 }

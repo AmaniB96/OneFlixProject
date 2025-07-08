@@ -9,7 +9,7 @@ export default function LatestAnime() {
             <section className={styles.latestSection}>
                 <div>
                     <div>
-                        <h2 className="sectionTitle">Latest Trending</h2>
+                        <h2 className="sectionTitle">Latest Trend</h2>
                     </div>
 
                     <div className={styles.latestCardDisplay}>
