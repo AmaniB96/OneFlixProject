@@ -1,0 +1,116 @@
+.latestSection{
+    padding-left: 150px;
+    margin-bottom: 100px;
+}
+
+.latestCard{
+    position: relative;
+    height: 550px;
+    width: 300px;
+    margin-left: -100px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.85);
+    z-index: 1;
+}
+
+.latestCard:hover{
+    z-index: 1000;
+    width: 100%;
+    filter: brightness(105%);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.latestCardDisplay{
+    display: flex;
+    overflow: hidden;
+    width: 95%;
+}
+
+.latestCard:first-child {
+    margin-left: 0;
+    z-index: 10;
+}
+
+.latestCard:nth-of-type(2) {
+    filter: brightness(90%);
+    z-index: 9;
+}
+
+.latestCard:nth-of-type(3) {
+    filter: brightness(85%);
+    z-index: 8;
+}
+
+.latestCard:nth-of-type(4) {
+    filter: brightness(80%);
+    z-index: 7;
+}
+
+.latestCard:nth-of-type(5) {
+    filter: brightness(75%);
+    z-index: 6;
+}
+
+.latestCard:nth-of-type(2):hover,
+.latestCard:nth-of-type(3):hover,
+.latestCard:nth-of-type(4):hover,
+.latestCard:nth-of-type(5):hover {
+    filter: brightness(105%);
+    z-index: 1000;
+}
+
+.rank {
+    z-index: 1002;
+    font-weight: 700;
+    font-size: 35px;
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    filter: brightness(130%);
+}
+
+.hoverContent {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(35,34,34,0.92);
+    color: #fff;
+    padding: 32px 18px 24px 18px;
+    border-radius: 0 0 5px 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.latestCard:hover .hoverContent {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.watchBtn {
+    background: #FAC402;
+    color: #232222;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.watchBtn:hover {
+    background: #ffe066;
+}

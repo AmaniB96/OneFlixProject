@@ -8,12 +8,7 @@ export default function FilterSection() {
 
             <div className={styles.card}>
               <div className={styles.cardImageWrapper}>
-                <Image 
-                  src="/assets/snk.jpg" 
-                  alt="Anime title"
-                  fill
-                  className={styles.cardImage}
-                />
+                <Image src="/assets/snk.jpg" alt="Anime title" fill className={styles.cardImage}/>
                 <div className={styles.cardOverlay}>
                   <div className={styles.cardRating}>
                     <span>★</span>

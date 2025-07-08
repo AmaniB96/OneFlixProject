@@ -62,7 +62,7 @@
 }
 
 .videoWrapper:nth-child(2):hover .videoCrop {
-  left: 50%;
+  left: 60%;
   transform: translateX(-50%); 
 }
 

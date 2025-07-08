@@ -1,62 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Julius+Sans+One&display=swap');
 
-.MainNav{
+.MainNav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     z-index: 1000;
-    top: 25px;
-    left: 6%;
-    width: 80%;
-    padding-left: 85px;
-    padding-right: 85px;
-    /* background-color: #232222; */
-    padding:10px;
-    border-radius:10px ;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82vw;
+    padding: 0 40px;
+    height: 68px;
+    background: rgba(35,34,34,0.85);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border-radius: 18px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(80,76,76,0.18);
 }
 
-.btn{
-    background-color: #FAC402;
-    color: black;
-    padding: 5px;
-    border-radius: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border: none;
-}
-
-.leftNavSide{
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-items: center;
-    margin-top: 8px;
-}
-
-.searchInput{
-    background-color: #504C4C;
-    color: white;
-    padding: 5px;
-    border-radius: 8px;
-    border: none;
-}
-
-.logoDiv{
+.logoDiv {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
 }
 
-.logoOne{
-    height: 35px;
-    width: 35px;}
+.logoOne {
+    height: 44px;
+    width: 44px;
+    border-radius: 8px;
+    background: transparent;
+    object-fit: contain;
+}
 
-.logoText{
-    font-size: 20px;
-    color: white;
+.logoText {
+    font-size: 1.5rem;
+    color: #fff;
     font-weight: bold;
-    font-family:"Julius Sans One";
+    font-family: "Julius Sans One", sans-serif;
     letter-spacing: 3px;
-    margin-top: 8px;
+    margin-top: 0;
+}
+.logoText span {
+    color: #FAC402;
+    font-weight: 900;
+}
+
+.leftNavSide {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    background: #353535;
+    border-radius: 10px;
+    padding: 2px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding-right: 0;
+    height: 100%;
+}
+
+.searchInput {
+    background: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 7px 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    min-width: 180px;
+}
+
+.btn {
+    background-color: #FAC402;
+    color: #232222;
+    padding: 7px 18px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 8px;
+    transition: background 0.18s, color 0.18s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.btn:hover {
+    background: #ffe066;
+    color: #18181f;
 }
