@@ -5,6 +5,7 @@ import FilterHeader from '../component/filterHeader/FilterHeader';
 import CardsCarousel from '../component/cardsCarousel/CardsCarousel';
 import TopRanked from '../component/topRanked/TopRanked'
 import LatestAnime from '../component/latestAnime/LatestAnime'
+import NarutoSection from '../component/naruto/NarutoSection'
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <CardsCarousel />
       <TopRanked/>
       <LatestAnime/>
+      <NarutoSection/>
     </>
   );
 }

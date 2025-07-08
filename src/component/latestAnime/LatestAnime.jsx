@@ -9,7 +9,7 @@ export default function LatestAnime() {
             <section className={styles.latestSection}>
                 <div>
                     <div>
-                        <h2>Latest Trending</h2>
+                        <h2 className="sectionTitle">Latest Trending</h2>
                     </div>
 
                     <div className={styles.latestCardDisplay}>
@@ -19,6 +19,7 @@ export default function LatestAnime() {
                             <div className={styles.hoverContent}>
                                 <h4>Attack on Titan</h4>
                                 <p>Action • Dark Fantasy</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
                                 <button className={styles.watchBtn}>Buy Now</button>
                             </div>
                         </div>
@@ -28,6 +29,7 @@ export default function LatestAnime() {
                             <div className={styles.hoverContent}>
                                 <h4>Attack on Titan</h4>
                                 <p>Action • Dark Fantasy</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
                                 <button className={styles.watchBtn}>Buy Now</button>
                             </div>
                         </div>
@@ -37,6 +39,7 @@ export default function LatestAnime() {
                             <div className={styles.hoverContent}>
                                 <h4>Attack on Titan</h4>
                                 <p>Action • Dark Fantasy</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>                                
                                 <button className={styles.watchBtn}>Buy Now</button>
                             </div>
                         </div>
@@ -46,6 +49,7 @@ export default function LatestAnime() {
                             <div className={styles.hoverContent}>
                                 <h4>Attack on Titan</h4>
                                 <p>Action • Dark Fantasy</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
                                 <button className={styles.watchBtn}>Buy Now</button>
                             </div>
                         </div>
@@ -55,6 +59,7 @@ export default function LatestAnime() {
                             <div className={styles.hoverContent}>
                                 <h4>Attack on Titan</h4>
                                 <p>Action • Dark Fantasy</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem maxime officiis deserunt atque corrupti nobis blanditiis? Quasi est iure porro.</p>
                                 <button className={styles.watchBtn}>Buy Now</button>
                             </div>
                         </div>

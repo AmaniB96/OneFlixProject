@@ -1,0 +1,123 @@
+.narutoSection{
+    padding-left: 150px;
+    margin-bottom: 100px;
+    box-sizing: border-box;
+}
+
+.narutoCardSection{
+    display: flex;
+}
+
+.narutoCard{
+    position: relative;
+    height: 250px;
+    width: 95%;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.85);
+    z-index: 1;
+    margin-top: -50px;
+}
+
+.narutoCard:hover{
+    z-index: 1000;
+    filter: brightness(105%);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.narutoCardDisplay{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 95%;
+}
+
+.narutoCard:first-child {
+    margin-left: 0;
+    z-index: 10;
+}
+
+.narutoCard:nth-of-type(2) {
+    filter: brightness(90%);
+    z-index: 9;
+}
+
+.narutoCard:nth-of-type(3) {
+    filter: brightness(85%);
+    z-index: 8;
+}
+
+.narutoCard:nth-of-type(4) {
+    filter: brightness(80%);
+    z-index: 7;
+}
+
+.narutoCard:nth-of-type(5) {
+    filter: brightness(75%);
+    z-index: 6;
+}
+
+.narutoCard:nth-of-type(2):hover,
+.narutoCard:nth-of-type(3):hover,
+.narutoCard:nth-of-type(4):hover,
+.narutoCard:nth-of-type(5):hover {
+    filter: brightness(105%);
+    z-index: 1000;
+}
+
+.rank {
+    z-index: 0;
+    font-weight: 700;
+    font-size: 35px;
+    position: absolute;
+    bottom: 18px;
+    right: 22px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    filter: brightness(130%);
+}
+
+.hoverContent {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(35,34,34,0.92);
+    color: #fff;
+    padding: 32px 18px 24px 18px;
+    border-radius: 0 0 5px 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.narutoCard:hover .hoverContent {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.watchBtn {
+    background: #FAC402;
+    color: #232222;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.watchBtn:hover {
+    background: #ffe066;
+}

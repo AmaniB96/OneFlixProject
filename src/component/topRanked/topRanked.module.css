@@ -13,6 +13,7 @@
     font-weight: 200;
     margin-bottom: 60px;
     letter-spacing: -1px;
+    position: relative;
 }
 
 .featuredGrid {
@@ -104,3 +105,5 @@
     border-bottom: 1px rgba(102, 98, 98, 0.559) solid;
     padding: 20px;
 }
+
+
