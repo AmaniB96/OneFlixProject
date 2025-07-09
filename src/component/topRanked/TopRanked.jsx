@@ -10,7 +10,7 @@ export default async function TopRanked() {
     return (
         <section className={styles.featured}>
             <div className={styles.container}>
-                <h2 className={styles.sectionTitle}>Top Ranked</h2>
+                <h2 className="sectionTitle">Top Ranked</h2>
                 <div className={styles.featuredGrid}>
                     {topRanked.map((anime, idx) => (
                         <div key={anime.mal_id} className={styles.featuredItem}>

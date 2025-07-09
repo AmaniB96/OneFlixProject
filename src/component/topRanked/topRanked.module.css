@@ -89,23 +89,28 @@
 }
 
 
-.AllTimeBest{
-    background-color: #232222;
-    height: 600px;
-    width: 20%;
-    margin-left: 50px;
-    border-radius: 5px;
-    box-sizing: border-box;
+.AllTimeBest {
+  background-color: #1a1a1a;
+  height: 600px;
+  width: 20%;
+  margin-left: 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.AllTimeTitle{
-    height: 20%;
-    text-align: center;
-    padding: 15px;
+.AllTimeTitle {
+  font-size: 1.4rem;
+  font-weight: 200;
+  letter-spacing: -1px;
+  padding: 25px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.bestAnimeCont{
-    height: 80%;
+.bestAnimeCont {
+  padding: 15px;
+  height: calc(100% - 100px);
 }
 
 .bestAnimeDiv{
@@ -116,16 +121,24 @@
 }
 
 .bestAnimeDiv {
-  transition: background 0.4s, color 0.4s;
-  background: #222;
-  color: #fff;
-  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 18px 22px;
+  margin-bottom: 12px;
   border-radius: 10px;
-  padding: 16px 24px;
-  margin-bottom: 10px;
   position: relative;
-  z-index: 1;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  background-size: cover !important;
+  background-position: center !important;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  height: 19%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .yuyu{

@@ -13,8 +13,8 @@
 }
 
 .latestCard:hover{
-    z-index: 1000;
-    width: 100%;
+    z-index: 11;
+    width: 30%;
     filter: brightness(105%);
 }
 
