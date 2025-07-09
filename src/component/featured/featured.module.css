@@ -109,14 +109,13 @@
   border-radius: 4px;
   transition: all 0.2s ease;
   display: flex;
-  justify-content: flex-end;
+  gap: 10px;
+  justify-content: center;
 }
 
 .rate i{
     width: 100%;
     text-align: end;
-    margin-left: 40px;
-    margin-right: 0;
     height: 15px;
     width: 15px;
 }

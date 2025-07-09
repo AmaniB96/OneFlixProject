@@ -16,20 +16,20 @@ export default async function TopRanked() {
                 <div className={styles.featuredGrid}>
                     {topRanked.map((anime, idx) => (
                         <Link className={styles.featuredItem} key={anime.mal_id} href={`/anime/${anime.mal_id}`}>
-                        <div>
-                            <Image
-                                src={anime.images.webp.large_image_url}
-                                alt={anime.title}
-                                fill
-                                className={styles.cardImage}
-                            />
-                            <div className={styles.featuredContent}>
-                                <h3 className={styles.featuredTitle}>{anime.title}</h3>
-                                <p className={styles.featuredMeta}>
-                                    {anime.type} • {anime.year} {anime.studios?.[0]?.name && `• ${anime.studios[0].name}`}
-                                </p>
+                            <div>
+                                <Image
+                                    src={anime.images.webp.large_image_url}
+                                    alt={anime.title}
+                                    fill
+                                    className={styles.cardImage}
+                                />
+                                <div className={styles.featuredContent}>
+                                    <h3 className={styles.featuredTitle}>{anime.title}</h3>
+                                    <p className={styles.featuredMeta}>
+                                        {anime.type} • {anime.year} {anime.studios?.[0]?.name && `• ${anime.studios[0].name}`}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
                         </Link>
                     ))}
                 </div>
@@ -38,11 +38,11 @@ export default async function TopRanked() {
             <div className={styles.AllTimeBest}>
                 <p className={styles.AllTimeTitle}>All time best animes</p>
                 <ul className={styles.bestAnimeCont}>
-                    <div className={`${styles.bestAnimeDiv} ${styles.yuyu}`}>1. Yu Yu Hakusho</div>
-                    <div className={`${styles.bestAnimeDiv} ${styles.fma}`}>2. Fullmetal Alchemist: Brotherhood</div>
-                    <div className={`${styles.bestAnimeDiv} ${styles.op}`}>3. One Piece</div>
-                    <div className={`${styles.bestAnimeDiv} ${styles.naruto}`}>4. Naruto</div>
-                    <div className={`${styles.bestAnimeDiv} ${styles.hxh}`}>5. Hunter x Hunter</div>
+                    <Link href='/anime/392' className={`${styles.bestAnimeDiv} ${styles.yuyu}`}>1. Yu Yu Hakusho</Link>
+                    <Link href='/anime/5114' className={`${styles.bestAnimeDiv} ${styles.fma}`}>2. Fullmetal Alchemist: Brotherhood</Link>
+                    <Link href='/anime/21' className={`${styles.bestAnimeDiv} ${styles.op}`}>3. One Piece</Link>
+                    <Link href='/anime/20' className={`${styles.bestAnimeDiv} ${styles.naruto}`}>4. Naruto</Link>
+                    <Link href='/anime/11061' className={`${styles.bestAnimeDiv} ${styles.hxh}`}>5. Hunter x Hunter</Link>
                 </ul>
             </div>
         </section>

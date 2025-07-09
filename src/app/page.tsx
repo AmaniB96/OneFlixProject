@@ -14,9 +14,7 @@ export default function Home() {
         <HeroSection />
         <VideoCropGrid />
       </div>
-
       <Featured />
-
       <FilterHeader />
       <CardsCarousel />
       <TopRanked/>

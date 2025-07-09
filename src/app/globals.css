@@ -95,8 +95,29 @@ h1 {
 
 }
 
-.CatTitle{
- font-size: 20px;
+.categories {
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  width: 85vw;
+}
+
+.categoryItem {
+  display: inline-block;
+  background: #5c5b5b2c;
+  border-radius: 8px;
+  width: auto;
+  white-space: nowrap;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.catSlide{
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  gap: 10px;
+  scrollbar-width:none;
 }
 
 .filterSection{
@@ -154,3 +175,4 @@ h1 {
   top: 12px;
   left: -10px;
 }
+

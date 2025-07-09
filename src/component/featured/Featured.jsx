@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import styles from './featured.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Featured() {
     const featuredRef = useRef(null)
@@ -43,6 +44,7 @@ export default function Featured() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
     
+    
     return(
         <div className={styles.Featured} ref={featuredRef}>
             <div className={styles.imageWrapper} ref={imageRef}>
@@ -65,8 +67,8 @@ export default function Featured() {
                     is slaughtered in this epic anime series.
                 </p>
                 <div className={styles.btnDiv}>
-                    <button className={styles.buyButton}>Buy Now</button>
-                    <button className={styles.rate}><i className="fa-solid fa-star"></i></button>
+                    <Link href='/anime/38000' className={styles.buyButton}>Buy Now</Link>
+                    <button className={styles.rate}>8.43 <i className="fa-solid fa-star"></i></button>
                     <button className={styles.addBtn}><i className="fa-solid fa-plus"></i></button>
                 </div>
                 
