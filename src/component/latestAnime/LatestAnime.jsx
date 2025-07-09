@@ -1,6 +1,6 @@
 import Image from "next/image"
 import styles from './latestAnime.module.css'
-
+import Link from "next/link"
 
 export default async function LatestAnime() {
 
@@ -26,7 +26,10 @@ export default async function LatestAnime() {
                                     <h4>{element.title_english}</h4>
                                     <p>{element.genres[0].name}</p>
                                     <p>{element.synopsis.length > 120 ? element.synopsis.slice(0, 120) + '...': element.synopsis}</p>
-                                    <button className={styles.watchBtn}>Buy Now</button>
+                                    <Link href={`/anime/${element.mal_id}`}>
+                                        <button className={styles.watchBtn}>Buy Now</button>
+                                    </Link>
+                                    
                                 </div>
                             </div>
                     ))}

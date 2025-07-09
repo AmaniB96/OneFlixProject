@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import styles from './topRanked.module.css'
+import Link from 'next/link'
+
 
 export default async function TopRanked() {
 
@@ -13,7 +15,8 @@ export default async function TopRanked() {
                 <h2 className="sectionTitle">Top Ranked</h2>
                 <div className={styles.featuredGrid}>
                     {topRanked.map((anime, idx) => (
-                        <div key={anime.mal_id} className={styles.featuredItem}>
+                        <Link className={styles.featuredItem} key={anime.mal_id} href={`/anime/${anime.mal_id}`}>
+                        <div>
                             <Image
                                 src={anime.images.webp.large_image_url}
                                 alt={anime.title}
@@ -27,6 +30,7 @@ export default async function TopRanked() {
                                 </p>
                             </div>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </div>

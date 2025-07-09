@@ -16,6 +16,11 @@ body{
   color: white;
 }
 
+a{
+    text-decoration: none;
+}
+
+
 .MainDiv{
   width: 93%;
   height: 75vh;

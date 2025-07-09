@@ -1,0 +1,160 @@
+.detailsSection {
+  padding: 40px 0;
+  padding-top: 120px;
+  background: #000000;
+  min-height: 100vh;
+  color: #f3f3f3;
+  background-size:cover ;
+  background-position: center;
+}
+
+.heroDetails {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.coverImage {
+  position: relative;
+  width: 350px;
+  height: 500px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: #222;
+  flex-shrink: 0;
+}
+
+.img {
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.trailerWrapper {
+  width: 350px;
+  height: 200px;
+  aspect-ratio: 16/9;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.trailer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+.heroText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 50px;
+  gap: 18px;
+  height: 500px;
+  z-index: 50;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+  width: auto;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 1.05rem;
+  color: #bdbdbd;
+}
+
+.score {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffd700;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.genre {
+  background: #23232b;
+  color: #ffd700;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.synopsis {
+  margin: 18px 0;
+  font-size: 1.08rem;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+.extraInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 1rem;
+  color: #bdbdbd;
+}
+
+.trailerLink {
+  display: inline-block;
+  margin-top: 18px;
+  color: #000000;
+  background: #FAC402;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.trailerLink:hover {
+  background: #b0060f;
+}
+
+.additionalInfo{
+    margin-top: 80px;
+    margin-left: 150px;
+    width: 80%;
+}
+
+.videoBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.videoBg iframe {
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(0.4);
+}

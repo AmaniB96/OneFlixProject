@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import style from './mainNav.module.css'
+import Link from 'next/link'
+
 
 export default function MainNav() {
     return (
         <div className={style.MainNav}>
-            <div className={style.logoDiv}>
+            <Link href='/' className={style.logoDiv}>
                 <Image
                     className={style.logoOne}
                     src="/assets/logotest-removebg-preview.png"
@@ -13,7 +15,7 @@ export default function MainNav() {
                     alt="Logo"
                 />
                 <p className={style.logoText}><span>One</span>flix</p>
-            </div>
+            </Link>
             <div className={style.leftNavSide}>
                 <div className={style.search}>
                     <input className={style.searchInput} type="text" placeholder='Search for an anime...' />
