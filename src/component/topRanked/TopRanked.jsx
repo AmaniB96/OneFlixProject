@@ -5,7 +5,8 @@ import Link from 'next/link'
 
 export default async function TopRanked() {
 
-    const res = await fetch('https://api.jikan.moe/v4/top/anime')
+    const res = await fetch('https://api.jikan.moe/v4/top/anime', {
+    next: { revalidate: 3600 }});
     const data = await res.json()
     const topRanked = data.data?.slice(0,4) || [];
 

@@ -3,7 +3,9 @@ import styles from './narutoSection.module.css'
 
 export default async function NarutoSection() {
 
-    const res = await fetch('https://api.jikan.moe/v4/anime/20/episodes')
+    const res = await fetch('https://api.jikan.moe/v4/anime/20/episodes', {
+    next: { revalidate: 3600 }
+    });
     const data = await res.json()
     const filtered = data.data?.filter(ep => ep.score > 4.50) || [];
     const topNaruto1 = filtered.slice(0, 5);
@@ -17,8 +19,6 @@ export default async function NarutoSection() {
                     const narutoImg2 = Array.isArray(dataImg.data)
                     ? dataImg.data.map(img => img.webp.large_image_url).slice(5, 10)
                     : [];
-
-  console.log(dataImg);
 
     return(
         <>

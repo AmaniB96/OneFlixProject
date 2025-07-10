@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import style from './sideNav.module.css'
 
 export default function SideNav() {
@@ -6,8 +7,8 @@ export default function SideNav() {
         <>
             <div className={style.SideNav}>
                 <ul className={style.NavIcon}>
-                    <li className={style.icon}><i className="fa-solid fa-house"></i></li>
-                    <li className={style.icon}><i className="fa-solid fa-compass"></i></li>
+                    <Link href='/' className={style.icon}><i className="fa-solid fa-house"></i></Link>
+                    <Link href='/features/discover' className={style.icon}><i className="fa-solid fa-compass"></i></Link>
                     <li className={style.icon}><i className="fa-regular fa-star"></i></li>
                 </ul>
                 

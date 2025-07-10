@@ -4,7 +4,9 @@ import Link from "next/link"
 
 export default async function LatestAnime() {
 
-    const res = await fetch('https://api.jikan.moe/v4/seasons/now')
+    const res = await fetch('https://api.jikan.moe/v4/seasons/now', {
+    next: { revalidate: 3600 }});
+
     const data = await res.json()
     const latestAnime= data.data?.slice(6,11) || [];
 
