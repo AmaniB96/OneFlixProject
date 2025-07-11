@@ -1,8 +1,9 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useFilterStore } from '@/app/stores/filterStore'
 import Image from 'next/image';
 import styles from './discover.module.css'
+import Link from 'next/link';
 
 export default function Discover() {
   const {
@@ -11,9 +12,20 @@ export default function Discover() {
     sortBy, setSortBy, searchQuery, setSearchQuery, lastPage
   } = useFilterStore();
 
+  const [searchInput, setSearchInput] = useState(searchQuery);
+
+
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearchQuery(searchInput);
+    }, 333); 
+
+    return () => clearTimeout(handler);
+  }, [searchInput, setSearchQuery]);
 
   useEffect(() => {
     fetchDiscoverAnime();
@@ -28,20 +40,22 @@ export default function Discover() {
           className={styles.search}
           type="text"
           placeholder="Search anime..."
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
+          value={searchInput}
+          onChange={e => setSearchInput(e.target.value)}
         />
 
         <div className={styles.categories}>
           <button
             className={selectedGenre === 'All' ? styles.categoryBtnActive : styles.categoryBtn}
-            onClick={() => setSelectedGenre('All')}
+            onClick={() => {
+              if (selectedGenre !== 'All') setSelectedGenre('All');
+            }}
           >All</button>
           {categories.map(cat => (
             <button
               key={cat.mal_id}
               className={selectedGenre === cat.mal_id ? styles.categoryBtnActive : styles.categoryBtn}
-              onClick={() => setSelectedGenre(cat.mal_id)}
+              onClick={() => setSelectedGenre(selectedGenre === cat.mal_id ? 'All' : cat.mal_id)}
             >{cat.name}</button>
           ))}
         </div>
@@ -64,6 +78,9 @@ export default function Discover() {
               width={220}
               height={320}
             />
+            <Link href={`/anime/${anime.mal_id}`}>
+                <button className={styles.watchBtn}>Buy Now</button>
+            </Link>
             <h3>{anime.title}</h3>
             <p>Score: {anime.score}</p>
             <p>Year: {anime.year}</p>
