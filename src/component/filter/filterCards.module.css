@@ -1,6 +1,6 @@
 .card {
   width: 400px;
-  background-color: #1a1a1a;
+  background-color: #1a1a1a42;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

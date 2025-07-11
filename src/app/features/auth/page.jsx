@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { UseAuthstore } from "../../stores/authStore"
 import styles from './auth.module.css'
 import { useRouter } from "next/navigation"
+import { signIn, signOut, useSession } from "next-auth/react";
+
 
 
 export default function Auth() {
@@ -11,6 +13,8 @@ export default function Auth() {
     const [isLogin,setIsLogin] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const { data: session } = useSession();
+
     const router = useRouter();
 
     useEffect(() => {
@@ -18,6 +22,12 @@ export default function Auth() {
             router.push('/');
         }
     }, [user, router]);
+
+    useEffect(() => {
+        if (session) {
+            router.push('/');
+        }
+    }, [session, router]);
 
     if (user) {
         return (
@@ -77,8 +87,9 @@ export default function Auth() {
                         onChange={e => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
-                    <button type="button" onClick={() => setIsLogin(!isLogin)}>
+                    <button className={styles.authBtn} type="submit">{isLogin ? 'Login' : 'Register'}</button>
+                    <button className={styles.authBtn} type="button" onClick={() => signIn("google")}>Se connecter avec Google</button>
+                    <button className={styles.authConnex} type="button" onClick={() => setIsLogin(!isLogin)}>
                         {isLogin ? 'Create an account' : 'Already have an account? Login'}
                     </button>
                     {loginError && <div style={{ color: 'red' }}>{loginError}</div>}

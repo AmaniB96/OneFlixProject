@@ -52,27 +52,10 @@
     gap: 18px;
 }
 
-.search {
-    display: flex;
-    align-items: center;
-    background: #353535;
-    border-radius: 10px;
-    padding: 2px 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding-right: 0;
-    height: 100%;
-}
 
-.searchInput {
-    background: transparent;
-    color: #fff;
-    border: none;
-    outline: none;
-    padding: 7px 10px;
-    font-size: 1rem;
-    border-radius: 6px;
-    min-width: 180px;
-}
+.cartIcon{
+        filter: brightness(0) saturate(100%) invert(77%) sepia(74%) saturate(2586%) hue-rotate(3deg) brightness(107%) contrast(98%);
+    }
 
 .btn {
     background-color: #FAC402;

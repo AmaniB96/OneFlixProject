@@ -24,7 +24,7 @@ export default function FilterCards() {
                                 <span>★</span>
                                 <span>{anime.score || 'N/A'}</span>
                             </div>
-                            <Link href={`/anime/${anime.mal_id}`} className={styles.cardButton}>Watch Now</Link>
+                            <Link href={`/anime/${anime.mal_id}`} className={styles.cardButton}>Buy Now</Link>
                         </div>
                     </div>
                     <div className={styles.cardInfo}>

@@ -74,7 +74,7 @@
   margin-bottom: 10px;
 }
 
-.formBox button[type="submit"] {
+.authBtn {
   background: #FAC402;
   color: #232222;
   border: none;
@@ -86,7 +86,7 @@
   margin-bottom: 8px;
 }
 
-.formBox button[type="button"] {
+.authConnex {
   background: none;
   color: #FAC402;
   border: none;
