@@ -1,0 +1,100 @@
+.splitContainer {
+  display: flex;
+  min-height: 100vh;
+  background: #232222;
+  font-family: "Manrope";
+}
+
+.leftSide {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #232222;
+  overflow: hidden;
+}
+
+.leftSide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%; 
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent 0%, #232222 100%);
+}
+
+.bgVideoLeft {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.rightSide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #232222;
+}
+
+.formBox {
+  background: #1a1a1a;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #00000040;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formBox h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.formBox input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #5c5b5b2c;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.formBox button[type="submit"] {
+  background: #FAC402;
+  color: #232222;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.formBox button[type="button"] {
+  background: none;
+  color: #FAC402;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.formBox div {
+  text-align: center;
+}

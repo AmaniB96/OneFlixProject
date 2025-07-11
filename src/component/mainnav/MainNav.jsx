@@ -1,9 +1,17 @@
+'use client'
+
 import Image from 'next/image'
 import style from './mainNav.module.css'
 import Link from 'next/link'
+import { UseAuthstore } from '@/app/stores/authStore'
+import { useState } from 'react'
+
 
 
 export default function MainNav() {
+    const { user,logout } = UseAuthstore();
+    const [open, setOpen] = useState(false);
+
     return (
         <div className={style.MainNav}>
             <Link href='/' className={style.logoDiv}>
@@ -17,12 +25,32 @@ export default function MainNav() {
                 <p className={style.logoText}><span>One</span>flix</p>
             </Link>
             <div className={style.leftNavSide}>
-                <div className={style.search}>
-                    <input className={style.searchInput} type="text" placeholder='Search for an anime...' />
-                    <button className={style.btn}>Search</button>
-                </div>
                 <div>
-                    <button className={style.btn}>Login</button>
+                    {user ? (
+                        <>
+                            <span
+                                className={style.btn}
+                                onClick={() => setOpen(!open)}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                Hi {user.username} ▼
+                            </span>
+                            {open && (
+                                <div className={style.dropdown}>
+                                    <button
+                                        className={style.dropdownBtn}
+                                        onClick={() => {
+                                            logout();
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    ) : <Link href='/features/auth' className={style.btn}>Login</Link>
+                    }
                 </div>
             </div>
         </div>

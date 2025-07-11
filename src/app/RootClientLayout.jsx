@@ -4,6 +4,8 @@ import SplashScreen from "../component/SplashScreen/SplashScreen";
 import MainNav from "../component/mainnav/MainNav";
 import SideNav from "../component/sidenav/SideNav";
 import Footer from "../component/footer/Footer"
+import { usePathname } from 'next/navigation'
+
 
 export default function RootClientLayout({ children, geistSans, geistMono }) {
   const [loading, setLoading] = useState(true);
@@ -13,11 +15,15 @@ export default function RootClientLayout({ children, geistSans, geistMono }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const pathname = usePathname();
+
+  const hideSideNav = pathname.startsWith('/features/auth');
+
   return (
     <body className={`${geistSans} ${geistMono} antialiased`}>
       {loading && <SplashScreen />}
       <MainNav />
-      <SideNav />
+      {!hideSideNav && <SideNav />}
       {children}
       <Footer/>
     </body>
