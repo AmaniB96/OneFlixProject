@@ -6,12 +6,15 @@ import Link from 'next/link'
 import { UseAuthstore } from '@/app/stores/authStore'
 import { useState } from 'react'
 import { signOut,useSession } from 'next-auth/react'
+import {useCartStore} from '../../app/stores/cartStore'
 
 
 export default function MainNav() {
     const { user,logout } = UseAuthstore();
     const [open, setOpen] = useState(false);
     const {data: session} = useSession();
+    const { cart, removeFromCart } = useCartStore();
+    const [cartOpen, setCartOpen] = useState(false);
 
     const username = session?.user?.name || user?.usename;
 
@@ -31,9 +34,27 @@ export default function MainNav() {
                 <p className={style.logoText}><span>One</span>flix</p>
             </Link>
             <div className={style.leftNavSide}>
-                <div style={{display:'flex', alignItems:'center', gap:'15px'}}>
+                <div onMouseEnter={() => setCartOpen(true)} onMouseLeave={() => setCartOpen(false)} style={{display:'flex', alignItems:'center', gap:'15px', position:'relative'}}>
                     <Image className={style.cartIcon} alt='cart' width={30} height={30} src='/assets/shopping-bag-svgrepo-com.svg'></Image>
-
+                    {cart.length > 0 && (
+                        <span className={style.cartCount}>{cart.length}</span>
+                    )}
+                    {cartOpen && (
+                        <div className={style.cartPreview}>
+                            <h4>Panier</h4>
+                            {cart.length === 0 ? (
+                                <div className={style.cartEmpty}>Votre panier est vide</div>
+                            ) : (
+                                cart.map(item => (
+                                    <div key={item.id} className={style.cartItem}>
+                                        <img src={item.image} alt={item.title} width={40} height={40} />
+                                        <span>{item.title}</span>
+                                        <button onClick={() => removeFromCart(item.id)}>✕</button>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )}
                     {isAuthenticated ? (
                         <>
                             <span
