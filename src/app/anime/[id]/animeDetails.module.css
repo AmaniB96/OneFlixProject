@@ -177,3 +177,167 @@
   pointer-events: none;
   filter: brightness(0.4);
 }
+
+
+.episodesSection {
+  margin-top: 48px;
+  background: #18181f;
+  border-radius: 16px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  box-shadow: 0 2px 12px #00000030;
+  width: 80%;
+  margin-left: 150px;
+}
+
+.episodesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.episodeCard {
+  background: #23232b;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 18px;
+  width: 20%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  box-shadow: 0 1px 6px #00000020;
+}
+
+.episodeNumber {
+  color: #FAC402;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.episodeTitle {
+  font-size: 0.98rem;
+  color: #e0e0e0;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+
+.episodePrice {
+  color: #FAC402;
+  font-weight: 600;
+  margin: 8px 0 4px 0;
+  font-size: 1rem;
+}
+
+.episodeAddBtn {
+  background: #FAC402;
+  color: #232222;
+  border-radius: 8px;
+  border: none;
+  padding: 6px 16px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.18s, color 0.18s;
+}
+
+.episodeAddBtn:hover {
+  background: #ffd700;
+  color: #18181f;
+}
+
+.episodesPagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.pageBtn,
+.pageBtnActive {
+  background: #232222;
+  color: #FAC402;
+  border-radius: 6px;
+  border: none;
+  padding: 7px 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.pageBtnActive {
+  background: #FAC402;
+  color: #232222;
+}
+
+.pageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tabs {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 22px;
+  justify-content: center;
+}
+
+.tab, .tabActive {
+  background: #232222;
+  color: #FAC402;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.tabActive {
+  background: #FAC402;
+  color: #232222;
+}
+
+.charactersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+}
+
+.characterCard {
+  background: #23232b;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px 18px;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 6px #00000020;
+}
+
+.characterImg {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.characterName {
+  font-weight: 700;
+  color: #FAC402;
+  display: block;
+}
+
+.voiceActor {
+  font-size: 0.98rem;
+  color: #e0e0e0;
+  display: block;
+  margin-top: 2px;
+}

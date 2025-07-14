@@ -3,6 +3,10 @@
 import Image from 'next/image';
 import styles from './animeDetails.module.css';
 import { useCartStore } from '../../stores/cartStore';
+import { useEpisodeStore } from '../../stores/episodeStore';
+import { useState, useEffect } from 'react';
+import EpisodesAndCharacters from './EpisodesAndCharacters';
+
 
 
 export default function AnimeDetails({ anime }) {
@@ -10,6 +14,15 @@ export default function AnimeDetails({ anime }) {
     const trailerId = anime.trailer?.youtube_id;    
 
     const { addToCart } = useCartStore();
+    const { episodes, fetchEpisodes } = useEpisodeStore();
+    const [currentPage, setCurrentPage] = useState(1);
+    const episodesPerPage = 20;
+    const totalPages = Math.ceil(episodes.length / episodesPerPage);
+
+ 
+    useEffect(() => {
+    fetchEpisodes(anime.mal_id, currentPage);
+    }, [anime.mal_id, currentPage, fetchEpisodes]);
 
     return (
         <section className={styles.detailsSection}>
@@ -73,7 +86,8 @@ export default function AnimeDetails({ anime }) {
                         {anime.source && <span><strong>Source:</strong> {anime.source}</span>}
                     </div>
         </div> 
-
+        
+         <EpisodesAndCharacters anime={anime} />
         </section>
     );
 }
