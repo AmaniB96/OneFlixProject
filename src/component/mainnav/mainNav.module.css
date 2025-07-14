@@ -103,7 +103,7 @@
 .cartCount {
   position: absolute;
   top: -7px;
-  right: 95px;
+  right: -7px;
   background: #FAC402;
   color: #232222;
   border-radius: 50%;
@@ -155,4 +155,29 @@
   color: #FAC402;
   text-align: center;
   margin: 12px 0;
+}
+
+.cartTotal {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #FAC402;
+  text-align: right;
+}
+
+.checkoutBtn {
+  margin-top: 14px;
+  background: #FAC402;
+  color: #232222;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.18s, color 0.18s;
+}
+.checkoutBtn:hover {
+  background: #ffd700;
+  color: #18181f;
 }

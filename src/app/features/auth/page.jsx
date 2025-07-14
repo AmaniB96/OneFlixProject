@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { UseAuthstore } from "../../stores/authStore"
+import { useAuthStore } from "../../stores/authStore"
 import styles from './auth.module.css'
 import { useRouter } from "next/navigation"
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -9,7 +9,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 
 export default function Auth() {
-    const {user, login, register,logout,loginError,registerError}= UseAuthstore()
+    const {user, login, register,logout,loginError,registerError}= useAuthStore()
     const [isLogin,setIsLogin] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')

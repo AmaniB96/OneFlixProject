@@ -1,0 +1,163 @@
+.cartContainer {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #18181f;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 12px #00000030;
+  margin-top: 150PX;
+}
+
+.cartTitle {
+  color: #FAC402;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  background: #23232b;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.cartItemTitle {
+  flex: 1;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.cartItemPrice {
+  color: #FAC402;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.cartRemoveBtn {
+  background: none;
+  border: none;
+  color: #FAC402;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.18s;
+}
+.cartRemoveBtn:hover {
+  color: #ffd700;
+}
+
+.cartTotal {
+  text-align: right;
+  margin-top: 18px;
+  font-weight: 600;
+  color: #FAC402;
+  font-size: 1.15rem;
+}
+
+.cartForm {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cartInput {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #23232b;
+  color: #FAC402;
+  font-size: 1rem;
+}
+
+.cartPayBtn {
+  background: #FAC402;
+  color: #232222;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.18s, color 0.18s;
+}
+.cartPayBtn:hover {
+  background: #ffd700;
+  color: #18181f;
+}
+
+.cartSuccess {
+  text-align: center;
+  color: #FAC402;
+  padding: 32px;
+  font-size: 1.2rem;
+}
+
+.cartLabel {
+  color: #FAC402;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.paymentMethods {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 18px;
+  color: #FAC402;
+  font-size: 1rem;
+}
+
+.cardType {
+  color: #FAC402;
+  margin-top: 6px;
+  font-size: 1rem;
+}
+
+.paypalMock {
+  background: #23232b;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.deliveryDetails {
+  margin-top: 32px;
+  background: #23232b;
+  border-radius: 8px;
+  padding: 16px;
+  color: #FAC402;
+  font-size: 1rem;
+}
+
+.legalSection {
+  margin-top: 24px;
+  background: #23232b;
+  border-radius: 8px;
+  padding: 16px;
+  color: #FAC402;
+  font-size: 1rem;
+}
+
+.legalSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+  display: flex;
+  gap: 18px;
+}
+
+.legalSection a {
+  color: #FAC402;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.18s;
+}
+.legalSection a:hover {
+  color: #ffd700;
+}

@@ -3,20 +3,19 @@
 import Image from 'next/image'
 import style from './mainNav.module.css'
 import Link from 'next/link'
-import { UseAuthstore } from '@/app/stores/authStore'
+import { useAuthStore } from '@/app/stores/authStore'
 import { useState } from 'react'
 import { signOut,useSession } from 'next-auth/react'
 import {useCartStore} from '../../app/stores/cartStore'
 
-
 export default function MainNav() {
-    const { user,logout } = UseAuthstore();
+    const { user,logout } = useAuthStore();
     const [open, setOpen] = useState(false);
     const {data: session} = useSession();
     const { cart, removeFromCart } = useCartStore();
     const [cartOpen, setCartOpen] = useState(false);
 
-    const username = session?.user?.name || user?.usename;
+    const username = session?.user?.name || user?.username;
 
     const isAuthenticated = !!session || !!user;
 
@@ -35,24 +34,36 @@ export default function MainNav() {
             </Link>
             <div className={style.leftNavSide}>
                 <div onMouseLeave={() => setCartOpen(false)} style={{display:'flex', alignItems:'center', gap:'15px', position:'relative'}}>
-                    <Image  onMouseEnter={() => setCartOpen(true)}  className={style.cartIcon} alt='cart' width={30} height={30} src='/assets/shopping-bag-svgrepo-com.svg'></Image>
+                    <div style={{position:'relative'}}><Image  onMouseEnter={() => setCartOpen(true)}  className={style.cartIcon} alt='cart' width={30} height={30} src='/assets/shopping-bag-svgrepo-com.svg'></Image>
                     {cart.length > 0 && (
                         <span className={style.cartCount}>{cart.length}</span>
-                    )}
+                    )}</div>
                     {cartOpen && (
                         <div className={style.cartPreview}>
                             <h4>Cart</h4>
                             {cart.length === 0 ? (
                                 <div className={style.cartEmpty}>Your cart is empty</div>
                             ) : (
-                                cart.map(item => (
-                                    <div key={item.id} className={style.cartItem}>
-                                        <Image src={item.image} alt={item.title} width={40} height={40} />
-                                        <span>{item.title}</span>
-                                        <span style={{whiteSpace:'nowrap', paddingRight:'15px'}}>{item.price} €</span>
-                                        <button onClick={() => removeFromCart(item.id)}>✕</button>
+                                <>
+                                    {cart.map(item => (
+                                        <div key={item.id} className={style.cartItem}>
+                                            <Image src={item.image} alt={item.title} width={40} height={40} />
+                                            <span>{item.title}</span>
+                                            <span style={{whiteSpace:'nowrap', paddingRight:'15px'}}>{item.price} €</span>
+                                            <button onClick={() => removeFromCart(item.id)}>✕</button>
+                                        </div>
+                                    ))}
+                                    <div className={style.cartTotal}>
+                                        <strong>Total: </strong>
+                                        {cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2)} €
                                     </div>
-                                ))
+                                    <Link
+                                        href='/features/cart'
+                                        className={style.checkoutBtn}
+                                    >
+                                        Checkout
+                                    </Link>
+                                </>
                             )}
                         </div>
                     )}

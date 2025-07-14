@@ -1,12 +1,16 @@
 import { create } from "zustand";
 
-export const UseAuthstore = create((set,get) => ({
+export const useAuthStore = create((set,get) => ({
 
     user: null,
     users: [],
     loginError: '',
     registerError:'',
 
+    get isAuthenticated() {
+        return !!get().user;
+    },
+    
     login: (username, password) => {
         const {users} = get();
         const found = users.find(u => username === username && u.password === password)
