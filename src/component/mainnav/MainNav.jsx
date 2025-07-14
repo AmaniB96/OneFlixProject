@@ -34,21 +34,22 @@ export default function MainNav() {
                 <p className={style.logoText}><span>One</span>flix</p>
             </Link>
             <div className={style.leftNavSide}>
-                <div onMouseEnter={() => setCartOpen(true)} onMouseLeave={() => setCartOpen(false)} style={{display:'flex', alignItems:'center', gap:'15px', position:'relative'}}>
-                    <Image className={style.cartIcon} alt='cart' width={30} height={30} src='/assets/shopping-bag-svgrepo-com.svg'></Image>
+                <div onMouseLeave={() => setCartOpen(false)} style={{display:'flex', alignItems:'center', gap:'15px', position:'relative'}}>
+                    <Image  onMouseEnter={() => setCartOpen(true)}  className={style.cartIcon} alt='cart' width={30} height={30} src='/assets/shopping-bag-svgrepo-com.svg'></Image>
                     {cart.length > 0 && (
                         <span className={style.cartCount}>{cart.length}</span>
                     )}
                     {cartOpen && (
                         <div className={style.cartPreview}>
-                            <h4>Panier</h4>
+                            <h4>Cart</h4>
                             {cart.length === 0 ? (
-                                <div className={style.cartEmpty}>Votre panier est vide</div>
+                                <div className={style.cartEmpty}>Your cart is empty</div>
                             ) : (
                                 cart.map(item => (
                                     <div key={item.id} className={style.cartItem}>
-                                        <img src={item.image} alt={item.title} width={40} height={40} />
+                                        <Image src={item.image} alt={item.title} width={40} height={40} />
                                         <span>{item.title}</span>
+                                        <span style={{whiteSpace:'nowrap', paddingRight:'15px'}}>{item.price} €</span>
                                         <button onClick={() => removeFromCart(item.id)}>✕</button>
                                     </div>
                                 ))

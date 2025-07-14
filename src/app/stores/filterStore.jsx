@@ -89,7 +89,19 @@ export const useFilterStore = create((set, get) => ({
         }
 
         set({
-            animeList: unique,
+            animeList: unique.map(anime => {
+                // Generate base price between 5 and 30
+                const base = Math.floor(Math.random() * 26) + 5;
+                // Pick a realistic ending
+                const endings = [0.95, 0.99, 0.00];
+                const ending = endings[Math.floor(Math.random() * endings.length)];
+                // Compose the price
+                const price = (base + ending).toFixed(2);
+                return {
+                    ...anime,
+                    price
+                };
+            }),
             lastPage: data.pagination?.last_visible_page || 1,
             isLoading: false
         });

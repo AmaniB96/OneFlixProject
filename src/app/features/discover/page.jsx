@@ -84,6 +84,7 @@ export default function Discover() {
             <h3>{anime.title}</h3>
             <p>Score: {anime.score}</p>
             <p>Year: {anime.year}</p>
+            <p>Price: {anime.price} €</p>
           </div>
         ))}
       </div>

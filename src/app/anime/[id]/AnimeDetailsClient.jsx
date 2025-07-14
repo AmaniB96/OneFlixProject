@@ -55,11 +55,12 @@ export default function AnimeDetails({ anime }) {
                             </span>
                         ))}
                     </div>
-                    {anime.trailer?.url && (
-                        <button onClick={() => addToCart({id: anime.mal_id, title: anime.title, image: anime.images.jpg.large_image_url})} style={{width:'170px'}} href={anime.trailer.url} target="_blank" rel="noopener noreferrer"className={styles.trailerLink}>
+                    <div className={styles.price}>{anime.price} €</div>
+                    
+                        <button onClick={() => addToCart({id: anime.mal_id, title: anime.title, image: anime.images.jpg.large_image_url, price: anime.price})} style={{width:'170px'}} href={anime.trailer.url} target="_blank" rel="noopener noreferrer"className={styles.trailerLink}>
                             Add to cart +
                         </button>
-                    )}
+                
                 </div>
             </div>
         <div className={styles.additionalInfo}>
