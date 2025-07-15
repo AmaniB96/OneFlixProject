@@ -20,3 +20,16 @@ export function generateDeterministicPrice(mal_id) {
     const price = (base + ending).toFixed(2);
     return price;
 }
+
+/**
+ * Génère une remise aléatoire entre 10% et 30%.
+ * @returns {{discountPercent: number, multiplier: number}} - Un objet contenant le pourcentage de remise et le multiplicateur à appliquer.
+ */
+export function generateRandomDiscount() {
+  // Génère un pourcentage de remise entier entre 10 et 30
+  const discountPercent = Math.floor(Math.random() * 21) + 10; 
+  // Calcule le multiplicateur de prix (ex: 20% de remise -> multiplicateur de 0.80)
+  const multiplier = 1 - (discountPercent / 100);
+  
+  return { discountPercent, multiplier };
+}

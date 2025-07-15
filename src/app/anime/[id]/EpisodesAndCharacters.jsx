@@ -1,13 +1,15 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useEpisodeStore } from '../../stores/episodeStore';
+// 1. Get the full cart state, not just the addToCart function
 import { useCartStore } from '../../stores/cartStore';
 import styles from './animeDetails.module.css';
 
 
 export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
     const { episodes, isLoading: isLoadingEpisodes, fetchEpisodes, lastPage, characters, isLoadingCharacters, fetchCharacters } = useEpisodeStore();
-    const { addToCart } = useCartStore();
+    // 2. Destructure cart and addToCart from the store
+    const { cart, addToCart } = useCartStore();
     const [tab, setTab] = useState('episodes');
     const [currentPage, setCurrentPage] = useState(1);
     const [hoveredCharId, setHoveredCharId] = useState(null);
@@ -24,15 +26,16 @@ export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
     }, [anime.mal_id, tab, fetchCharacters]);
 
 
-    const EPISODE_PRICE = 1.99; // Example price
+    const EPISODE_PRICE = 1.99;
 
-    // --- THIS IS THE KEY LOGIC ---
-    // If ownedEpisodes is provided, filter the list. Otherwise, show all episodes.
     const episodesToDisplay = ownedEpisodes 
         ? episodes.filter(ep => 
             ownedEpisodes === 'all' || ownedEpisodes.some(ownedEp => ownedEp.mal_id === ep.mal_id)
           )
         : episodes;
+
+    // 3. Check if the entire anime series is already in the cart
+    const isFullAnimeInCart = cart.some(item => item.id === anime.mal_id);
 
     return (
         <div className={styles.episodesSection}>
@@ -58,35 +61,43 @@ export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
                     ) : (
                         <>
                             <div className={styles.episodesList}>
-                                {/* We map over the filtered list `episodesToDisplay` */}
-                                {episodesToDisplay.map(ep => (
-                                    <div key={ep.mal_id || ep.id || ep.number} className={styles.episodeCard}>
-                                        <span className={styles.episodeNumber}>Ep {ep.mal_id || ep.number}</span>
-                                        <span className={styles.episodeTitle}>{ep.title}</span>
-                                        
-                                        {/* Only show the "Buy" button if it's NOT a collection view */}
-                                        {!ownedEpisodes && (
-                                            <>
-                                                <span className={styles.episodePrice}>{EPISODE_PRICE} €</span>
-                                                <button
-                                                    className={styles.episodeAddBtn}
-                                                    onClick={() => addToCart({
-                                                        id: `${anime.mal_id}-${ep.mal_id}`, 
-                                                        title: `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`,
-                                                        image: anime.images.jpg.large_image_url,
-                                                        price: EPISODE_PRICE,
-                                                        type: 'episode',
-                                                        // Pass the necessary data under specific keys
-                                                        animeData: anime,
-                                                        episodeData: ep
-                                                    })}
-                                                >
-                                                    Buy Episode
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-                                ))}
+                                {episodesToDisplay.map(ep => {
+                                    // 4. For each episode, check if it's in the cart
+                                    const episodeId = `${anime.mal_id}-${ep.mal_id}`;
+                                    const isEpisodeInCart = cart.some(item => item.id === episodeId);
+
+                                    // 5. The button is disabled if the full anime OR this specific episode is in the cart
+                                    const isButtonDisabled = isFullAnimeInCart || isEpisodeInCart;
+
+                                    return (
+                                        <div key={ep.mal_id} className={styles.episodeCard}>
+                                            <span className={styles.episodeNumber}>Ep {ep.mal_id}</span>
+                                            <span className={styles.episodeTitle}>{ep.title}</span>
+                                            
+                                            {!ownedEpisodes && (
+                                                <>
+                                                    <span className={styles.episodePrice}>{EPISODE_PRICE.toFixed(2)} €</span>
+                                                    <button
+                                                        className={styles.episodeAddBtn}
+                                                        disabled={isButtonDisabled} // Use the combined disabled logic
+                                                        onClick={() => addToCart({
+                                                            id: episodeId, 
+                                                            title: `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`,
+                                                            image: anime.images.jpg.large_image_url,
+                                                            price: EPISODE_PRICE,
+                                                            type: 'episode',
+                                                            animeData: anime,
+                                                            episodeData: ep
+                                                        })}
+                                                    >
+                                                        {/* 6. Display the correct message based on what's in the cart */}
+                                                        {isFullAnimeInCart ? 'Full Anime in Cart' : isEpisodeInCart ? 'In Cart' : 'Buy Episode'}
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                             <div className={styles.episodesPagination}>
                                 <button

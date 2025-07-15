@@ -94,7 +94,7 @@ export default function Discover() {
               <div className={styles.cardOverlay}>
                 <h3 className={styles.cardTitle}>{anime.title}</h3>
                 <p>score: {anime.score || 'N/A'}</p>
-                <p>{anime.price} €</p>
+                <p>{anime.price.toFixed(2)} €</p>
                 <Link href={{ pathname: `/anime/${anime.mal_id}`, query: { price: anime.price } }}>
                   <button className={styles.watchBtn}>Buy Now</button>
                 </Link>

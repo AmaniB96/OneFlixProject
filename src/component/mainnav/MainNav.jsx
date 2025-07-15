@@ -80,7 +80,7 @@ export default function MainNav() {
                                         <div key={item.id} className={style.cartItem}>
                                             <Image src={item.image} alt={item.title} width={40} height={40} />
                                             <span>{item.title}</span>
-                                            <span style={{whiteSpace:'nowrap', paddingRight:'15px'}}>{item.price} €</span>
+                                            <span style={{whiteSpace:'nowrap', paddingRight:'15px'}}>{item.price.toFixed(2)} €</span>
                                             <button onClick={() => removeFromCart(item.id)}>✕</button>
                                         </div>
                                     ))}

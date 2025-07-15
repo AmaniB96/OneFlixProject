@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import styles from './animeDetails.module.css';
+// 1. Importer l'état du panier en plus de la fonction addToCart
 import { useCartStore } from '../../stores/cartStore';
 import { useEpisodeStore } from '../../stores/episodeStore';
 import { useState, useEffect } from 'react';
@@ -14,13 +15,17 @@ export default function AnimeDetails({ anime }) {
     
      // Étape 1: Appeler les hooks à l'intérieur du composant
     const searchParams = useSearchParams();
-    const { addToCart } = useCartStore();
+    // 2. Récupérer le panier complet et la fonction
+    const { cart, addToCart } = useCartStore();
     const { episodes, fetchEpisodes } = useEpisodeStore();
 
     // Étape 2: Déplacer la logique de prix ici
     const priceFromQuery = searchParams.get('price');
     // On prend le prix de l'objet anime, OU de l'URL, OU une valeur par défaut si aucun n'existe
     const price = anime.price ?? priceFromQuery ?? 'N/A'; 
+
+    // 3. Vérifier si l'article est déjà dans le panier
+    const isInCart = cart.some(item => item.id === anime.mal_id);
 
     const trailerId = anime.trailer?.youtube_id;
     const [currentPage, setCurrentPage] = useState(1);
@@ -76,8 +81,9 @@ export default function AnimeDetails({ anime }) {
                             </span>
                         ))}
                     </div>
-                    <div className={styles.price}>{price} €</div>
+                    <div className={styles.price}>{parseFloat(price).toFixed(2)} €</div>
                     
+                        {/* 4. Logique conditionnelle pour le bouton */}
                         <button 
                             onClick={() => addToCart({
                                 // Pass only the necessary, serializable data
@@ -91,8 +97,9 @@ export default function AnimeDetails({ anime }) {
                             })} 
                             style={{width:'170px'}} 
                             className={styles.trailerLink}
+                            disabled={isInCart} // Désactive le bouton si l'article est dans le panier
                         >
-                            Add to cart +
+                            {isInCart ? 'Already in Cart' : 'Add to Cart +'}
                         </button>
                 
                 </div>

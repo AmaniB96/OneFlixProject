@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { generateDeterministicPrice } from '@/utils/pricing';
+// 1. Importer les deux fonctions de pricing
+import { generateDeterministicPrice, generateRandomDiscount } from '@/utils/pricing';
 
 // Plus besoin de drapeau `hasFetched` car chaque action peut déclencher un fetch.
 
@@ -54,11 +55,40 @@ export const useFilterStore = create((set, get) => ({
                 throw new Error(`API call failed. URL: ${url}. Response: ${JSON.stringify(data)}`);
             }
 
-            // Ajoute le prix et filtre les doublons
-            const preparedList = data.data.map(anime => ({
-                ...anime,
-                price: generateDeterministicPrice(anime.mal_id)
-            }));
+            const preparedList = data.data.map((anime, index) => {
+                // --- LA CORRECTION EST ICI ---
+                // Assurez-vous que le prix est un nombre en utilisant parseFloat
+                const originalPrice = parseFloat(generateDeterministicPrice(anime.mal_id));
+
+                // Vérifiez si la conversion a réussi. Sinon, utilisez un prix par défaut.
+                if (isNaN(originalPrice)) {
+                    console.error(`Could not determine price for anime ID: ${anime.mal_id}. Using default price.`);
+                    // Vous pouvez retourner l'anime sans prix ou avec un prix par défaut
+                    return { ...anime, price: 9.99, isOnSale: false }; 
+                }
+                
+                // Applique une promotion à 1 anime sur 5
+                if ((anime.mal_id + index) % 5 === 0) {
+                    const discount = generateRandomDiscount();
+                    const discountedPrice = originalPrice * discount.multiplier;
+                    
+                    return {
+                        ...anime,
+                        price: discountedPrice,
+                        originalPrice: originalPrice,
+                        isOnSale: true,
+                        discountPercent: discount.discountPercent,
+                    };
+                }
+
+                // Sinon, retourne l'anime avec son prix normal
+                return {
+                    ...anime,
+                    price: originalPrice,
+                    isOnSale: false,
+                };
+            });
+            
             const uniqueList = [...new Map(preparedList.map(anime => [anime.mal_id, anime])).values()];
 
             set({

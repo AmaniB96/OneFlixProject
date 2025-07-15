@@ -1,6 +1,7 @@
 'use client'
 import { useMemo } from 'react'; // 1. Importer useMemo
 import { useFilterStore } from '@/app/stores/filterStore'
+import { useCartStore } from '@/app/stores/cartStore';
 import styles from './filterCards.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,6 +10,7 @@ import { generateDeterministicPrice } from '@/utils/pricing';
 export default function FilterCards() {
 
     const animeList = useFilterStore(state => state.animeList)
+    const { addToCart } = useCartStore();
 
     // 2. On mélange la liste de manière stable avec useMemo
     // La liste ne sera mélangée que lorsque `animeList` changera.
@@ -57,6 +59,25 @@ export default function FilterCards() {
                                     <span className={styles.tag} key={g.mal_id}>{g.name}</span>
                                 ))}
                             </div>
+                        </div>
+                        <div className={styles.cardFooter}>
+                            {/* 2. Affiche le prix barré et le nouveau prix */}
+                            <div className={styles.priceContainer}>
+                                {anime.isOnSale && (
+                                    <span className={styles.originalPrice}>{anime.originalPrice.toFixed(2)}€</span>
+                                )}
+                                <span className={styles.currentPrice}>{anime.price.toFixed(2)}€</span>
+                            </div>
+                            <button onClick={() => addToCart({
+                                id: anime.mal_id,
+                                title: anime.title,
+                                image: anime.images.jpg.large_image_url,
+                                price: anime.price, // Utilise le prix final (remisé ou non)
+                                type: 'anime',
+                                animeData: anime
+                            })} className={styles.cardButton}>
+                                Add to cart
+                            </button>
                         </div>
                     </div>
                 )
