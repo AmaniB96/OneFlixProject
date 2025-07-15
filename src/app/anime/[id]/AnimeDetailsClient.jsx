@@ -80,10 +80,14 @@ export default function AnimeDetails({ anime }) {
                     
                         <button 
                             onClick={() => addToCart({
+                                // Pass only the necessary, serializable data
                                 id: anime.mal_id, 
                                 title: anime.title, 
                                 image: anime.images.jpg.large_image_url, 
-                                price: price 
+                                price: parseFloat(price) || 0, // Ensure price is a number
+                                type: 'anime',
+                                // Pass the full anime object under a separate, specific key
+                                animeData: anime 
                             })} 
                             style={{width:'170px'}} 
                             className={styles.trailerLink}

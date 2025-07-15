@@ -67,13 +67,17 @@ export default function EpisodesAndCharacters({ anime }) {
                                         <button
                                             className={styles.episodeAddBtn}
                                             onClick={() => addToCart({
-                                                id: `${anime.mal_id}-ep${ep.mal_id || ep.number}`,
-                                                title: `${anime.title_english || anime.title} - Ep ${ep.mal_id || ep.number}`,
+                                                id: `${anime.mal_id}-${ep.mal_id}`, 
+                                                title: `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`,
                                                 image: anime.images.jpg.large_image_url,
-                                                price: EPISODE_PRICE
+                                                price: EPISODE_PRICE,
+                                                type: 'episode',
+                                                // Pass the necessary data under specific keys
+                                                animeData: anime,
+                                                episodeData: ep
                                             })}
                                         >
-                                            Add to cart
+                                            Buy Episode
                                         </button>
                                     </div>
                                 ))}

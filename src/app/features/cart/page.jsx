@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import styles from './cart.module.css';
 import { useAuthStore } from '../../stores/authStore'; // adjust path as needed
 import { useSession } from 'next-auth/react';
+import { useCollectionStore } from '../../stores/collectionStore'; // Add this import
 
 function getCardType(number) {
     if (/^4/.test(number)) return 'Visa';
@@ -17,6 +18,7 @@ function getCardType(number) {
 
 export default function CartPage() {
     const { cart, removeFromCart, clearCart } = useCartStore();
+    const { addAnime, addEpisode } = useCollectionStore(); // Add these
     const [step, setStep] = useState('cart');
     const [paymentInfo, setPaymentInfo] = useState({ name: '', card: '', email: '', method: 'card' });
     const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2);
@@ -36,7 +38,18 @@ export default function CartPage() {
 
     function handlePay(e) {
         e.preventDefault();
+        
+        // Use the clean data from the cart items
+        cart.forEach(item => {
+            if (item.type === 'anime' && item.animeData) {
+                addAnime(item.animeData); 
+            } else if (item.type === 'episode' && item.animeData && item.episodeData) {
+                addEpisode(item.animeData, item.episodeData);
+            }
+        });
+
         setStep('success');
+        // IMPORTANT: Clear the cart *after* successfully adding to collection
         clearCart();
     }
 

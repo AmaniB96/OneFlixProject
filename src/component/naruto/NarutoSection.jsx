@@ -1,5 +1,8 @@
 import Image from "next/image"
 import styles from './narutoSection.module.css'
+import Link from "next/link";
+import { generateDeterministicPrice } from '@/utils/pricing';
+
 
 export default async function NarutoSection() {
 
@@ -32,6 +35,7 @@ export default async function NarutoSection() {
                         <div className={styles.narutoCardDisplay}>
                             {topNaruto1.map((element, index) => {
                                 const imgSrc = narutoImg[index];
+                                const price = generateDeterministicPrice(20); // Use episode mal_id if available, else anime id
                                 return (
                                     <div key={index} className={styles.narutoCard}>
                                     {imgSrc ? (
@@ -44,7 +48,15 @@ export default async function NarutoSection() {
                                         <h4>{element.title}</h4>
                                         <p>{element.mal_id}</p>
                                         <p style={{ textAlign: 'end' }}>{element.score}</p>
-                                        <button className={styles.watchBtn}>Buy Now</button>
+                                        <Link
+                                            href={{
+                                                pathname: `/anime/20`,
+                                                query: { price }
+                                            }}
+                                            className={styles.watchBtn}
+                                        >
+                                            Buy Now
+                                        </Link>
                                     </div>
                                     </div>
                                 );
@@ -54,6 +66,7 @@ export default async function NarutoSection() {
                         <div className={styles.narutoCardDisplay}>
                             {topNaruto2.map((element, index) => {
                                 const imgSrc1 = narutoImg2[index];
+                                const price = generateDeterministicPrice(20);
                                 return (
                                     <div key={index} className={styles.narutoCard}>
                                     {imgSrc1 ? (
@@ -66,7 +79,15 @@ export default async function NarutoSection() {
                                         <h4>{element.title}</h4>
                                         <p>{element.mal_id}</p>
                                         <p style={{ textAlign: 'end' }}>{element.score}</p>
-                                        <button className={styles.watchBtn}>Buy Now</button>
+                                        <Link
+                                            href={{
+                                                pathname: `/anime/20`,
+                                                query: { price }
+                                            }}
+                                            className={styles.watchBtn}
+                                        >
+                                            Buy Now
+                                        </Link>
                                     </div>
                                     </div>
                                 );

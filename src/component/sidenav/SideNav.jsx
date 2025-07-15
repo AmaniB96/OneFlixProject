@@ -9,7 +9,7 @@ export default function SideNav() {
                 <ul className={style.NavIcon}>
                     <Link href='/' className={style.icon}><i className="fa-solid fa-house"></i></Link>
                     <Link href='/features/discover' className={style.icon}><i className="fa-solid fa-compass"></i></Link>
-                    <li className={style.icon}><i className="fa-regular fa-star"></i></li>
+                    <Link href='/features/collection' className={style.icon}><i className="fa-regular fa-star"></i></Link>
                 </ul>
                 
             </div>

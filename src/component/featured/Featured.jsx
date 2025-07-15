@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react'
 import styles from './featured.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { generateDeterministicPrice } from '@/utils/pricing' // 1. Importer la fonction de prix
+
 
 export default function Featured() {
     const featuredRef = useRef(null)
@@ -44,6 +46,9 @@ export default function Featured() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
     
+        // 2. Définir l'ID de l'anime et générer son prix
+    const animeId = 38000; // Demon Slayer's MAL ID
+    const price = generateDeterministicPrice(animeId);
     
     return(
         <div className={styles.Featured} ref={featuredRef}>
@@ -67,7 +72,15 @@ export default function Featured() {
                     is slaughtered in this epic anime series.
                 </p>
                 <div className={styles.btnDiv}>
-                    <Link href='/anime/38000' className={styles.buyButton}>Buy Now</Link>
+                    <Link 
+                        href={{
+                            pathname: `/anime/${animeId}`,
+                            query: { price: price }
+                        }} 
+                        className={styles.buyButton}
+                    >
+                        Buy Now
+                    </Link>
                     <button className={styles.rate}>8.43 <i className="fa-solid fa-star"></i></button>
                     <button className={styles.addBtn}><i className="fa-solid fa-plus"></i></button>
                 </div>

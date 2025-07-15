@@ -6,12 +6,13 @@
 
 .narutoCardSection{
     display: flex;
+    justify-content: center;
 }
 
 .narutoCard{
     position: relative;
     height: 250px;
-    width: 95%;
+    width: 85%;
     box-shadow: 0 4px 24px rgba(0,0,0,0.85);
     z-index: 1;
     margin-top: -50px;

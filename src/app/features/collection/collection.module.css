@@ -1,0 +1,124 @@
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #f1f1f1;
+}
+
+.wrapper h1 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #FAC402;
+  font-weight: 700;
+}
+
+.collectionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.animeCard {
+  background: rgba(35, 34, 34, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.animeCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(250, 196, 2, 0.2);
+}
+
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 140%; /* Creates an aspect ratio for the image container */
+}
+
+.cardImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.animeCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 16px 16px 8px 16px;
+  flex-grow: 1;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  color: #f1f1f1;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardMeta {
+  padding: 0 16px 16px;
+  text-align: center;
+}
+
+.badge {
+  background-color: #FAC402;
+  color: #232222;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  display: inline-block;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px;
+  background: rgba(35, 34, 34, 0.5);
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 60px auto 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 20px 15px;
+  }
+  
+  .wrapper h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .animeCard {
+    /* Adjusting card layout for smaller screens */
+    flex-direction: column;
+  }
+  
+  .animeCard h2 {
+    font-size: 1.5rem;
+  }
+  
+  .animeCard ul {
+    gap: 8px;
+  }
+}
