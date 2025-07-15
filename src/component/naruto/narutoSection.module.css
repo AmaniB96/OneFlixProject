@@ -123,3 +123,57 @@
     background: #ffe066;
 }
 
+
+@media screen and (max-width: 1024px) {
+  .narutoSection {
+    padding-left: 30px;
+  }
+  
+  .narutoCard {
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .narutoSection {
+    padding-left: 15px;
+    margin-bottom: 50px;
+  }
+  
+  .narutoCard {
+    height: 180px;
+    width: 90%;
+    margin-top: -30px;
+  }
+  
+  .rank {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .narutoCardSection {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .narutoCard {
+    height: 150px;
+    width: 95%;
+    margin-top: 15px;
+  }
+  
+  .narutoCard:first-child {
+    margin-top: -50px;
+  }
+  
+  .narutoCard:nth-of-type(n+3) {
+    display: none; /* Masquer certaines cartes sur mobile pour éviter le défilement excessif */
+  }
+  
+  .rank {
+    font-size: 24px;
+    bottom: 10px;
+    right: 15px;
+  }
+}

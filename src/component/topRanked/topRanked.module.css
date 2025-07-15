@@ -190,3 +190,90 @@ color: #fff;
   opacity: 1;
   color: #fff;
 }
+
+
+@media screen and (max-width: 1200px) {
+  .featured {
+    padding-left: 30px;
+    flex-direction: column;
+  }
+  
+  .container {
+    width: 95%;
+  }
+  
+  .AllTimeBest {
+    width: 95%;
+    height: 400px;
+    margin-left: 0;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .bestAnimeDiv {
+    height: 18%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .featured {
+    padding-left: 15px;
+  }
+  
+  .featuredGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px 150px;
+    grid-template-areas:
+      "main main"
+      "right1 right2"
+      "bottom bottom";
+  }
+  
+  .sectionTitle {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+  
+  .featuredContent {
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+  }
+  
+  .featuredTitle {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .AllTimeBest {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 250px 150px 150px 120px;
+    grid-template-areas:
+      "main"
+      "right1"
+      "right2"
+      "bottom";
+    gap: 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .AllTimeBest {
+    height: 400px;
+  }
+  
+  .bestAnimeDiv {
+    height: 19%;
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+}
