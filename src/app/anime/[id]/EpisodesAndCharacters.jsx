@@ -1,32 +1,21 @@
+'use client'
 import { useState, useEffect } from 'react';
-import styles from './animeDetails.module.css';
-import { useCartStore } from '../../stores/cartStore';
 import { useEpisodeStore } from '../../stores/episodeStore';
+import { useCartStore } from '../../stores/cartStore';
+import styles from './animeDetails.module.css';
 
 
-const EPISODE_PRICE = 2.99;
-
-export default function EpisodesAndCharacters({ anime }) {
+export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
+    const { episodes, isLoading: isLoadingEpisodes, fetchEpisodes, lastPage, characters, isLoadingCharacters, fetchCharacters } = useEpisodeStore();
     const { addToCart } = useCartStore();
-    const {
-        episodes,
-        isLoadingEpisodes,
-        fetchEpisodes,
-        lastPage,
-        characters,
-        isLoadingCharacters,
-        fetchCharacters
-    } = useEpisodeStore();
-    const [currentPage, setCurrentPage] = useState(1);
     const [tab, setTab] = useState('episodes');
+    const [currentPage, setCurrentPage] = useState(1);
     const [hoveredCharId, setHoveredCharId] = useState(null);
 
 
     useEffect(() => {
-        if (tab === 'episodes') {
-            fetchEpisodes(anime.mal_id, currentPage);
-        }
-    }, [anime.mal_id, currentPage, tab, fetchEpisodes]);
+        fetchEpisodes(anime.mal_id, currentPage);
+    }, [anime.mal_id, currentPage, fetchEpisodes]);
 
     useEffect(() => {
         if (tab === 'characters') {
@@ -34,6 +23,16 @@ export default function EpisodesAndCharacters({ anime }) {
         }
     }, [anime.mal_id, tab, fetchCharacters]);
 
+
+    const EPISODE_PRICE = 1.99; // Example price
+
+    // --- THIS IS THE KEY LOGIC ---
+    // If ownedEpisodes is provided, filter the list. Otherwise, show all episodes.
+    const episodesToDisplay = ownedEpisodes 
+        ? episodes.filter(ep => 
+            ownedEpisodes === 'all' || ownedEpisodes.some(ownedEp => ownedEp.mal_id === ep.mal_id)
+          )
+        : episodes;
 
     return (
         <div className={styles.episodesSection}>
@@ -59,26 +58,33 @@ export default function EpisodesAndCharacters({ anime }) {
                     ) : (
                         <>
                             <div className={styles.episodesList}>
-                                {episodes.map(ep => (
+                                {/* We map over the filtered list `episodesToDisplay` */}
+                                {episodesToDisplay.map(ep => (
                                     <div key={ep.mal_id || ep.id || ep.number} className={styles.episodeCard}>
                                         <span className={styles.episodeNumber}>Ep {ep.mal_id || ep.number}</span>
                                         <span className={styles.episodeTitle}>{ep.title}</span>
-                                        <span className={styles.episodePrice}>{EPISODE_PRICE} €</span>
-                                        <button
-                                            className={styles.episodeAddBtn}
-                                            onClick={() => addToCart({
-                                                id: `${anime.mal_id}-${ep.mal_id}`, 
-                                                title: `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`,
-                                                image: anime.images.jpg.large_image_url,
-                                                price: EPISODE_PRICE,
-                                                type: 'episode',
-                                                // Pass the necessary data under specific keys
-                                                animeData: anime,
-                                                episodeData: ep
-                                            })}
-                                        >
-                                            Buy Episode
-                                        </button>
+                                        
+                                        {/* Only show the "Buy" button if it's NOT a collection view */}
+                                        {!ownedEpisodes && (
+                                            <>
+                                                <span className={styles.episodePrice}>{EPISODE_PRICE} €</span>
+                                                <button
+                                                    className={styles.episodeAddBtn}
+                                                    onClick={() => addToCart({
+                                                        id: `${anime.mal_id}-${ep.mal_id}`, 
+                                                        title: `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`,
+                                                        image: anime.images.jpg.large_image_url,
+                                                        price: EPISODE_PRICE,
+                                                        type: 'episode',
+                                                        // Pass the necessary data under specific keys
+                                                        animeData: anime,
+                                                        episodeData: ep
+                                                    })}
+                                                >
+                                                    Buy Episode
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                 ))}
                             </div>

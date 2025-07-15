@@ -35,6 +35,9 @@ export const useCollectionStore = create(
         }));
       },
 
+      // Add this function to clear the collection
+      clearCollection: () => set({ collection: {} }),
+
       getUserEpisodes: (animeId) => {
         const entry = get().collection[animeId];
         if (!entry) return [];

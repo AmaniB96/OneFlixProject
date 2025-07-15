@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './cart.module.css';
-import { useAuthStore } from '../../stores/authStore'; // adjust path as needed
+import { useAuthStore } from '../../stores/authStore';
 import { useSession } from 'next-auth/react';
-import { useCollectionStore } from '../../stores/collectionStore'; // Add this import
+import { useCollectionStore } from '../../stores/collectionStore';
+import { useOrderStore } from '../../stores/orderStore';
+import { calculateDiscountedTotal } from '../../../utils/promo';
 
 function getCardType(number) {
     if (/^4/.test(number)) return 'Visa';
@@ -18,10 +20,11 @@ function getCardType(number) {
 
 export default function CartPage() {
     const { cart, removeFromCart, clearCart } = useCartStore();
-    const { addAnime, addEpisode } = useCollectionStore(); // Add these
+    const { addAnime, addEpisode } = useCollectionStore();
+    const { addOrder } = useOrderStore();
     const [step, setStep] = useState('cart');
     const [paymentInfo, setPaymentInfo] = useState({ name: '', card: '', email: '', method: 'card' });
-    const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2);
+    const total = calculateDiscountedTotal(cart);
 
     // Auth logic
     const { user } = useAuthStore();
@@ -39,7 +42,14 @@ export default function CartPage() {
     function handlePay(e) {
         e.preventDefault();
         
-        // Use the clean data from the cart items
+        const newOrder = {
+            id: `order-${Date.now()}`,
+            date: new Date().toISOString(),
+            totalAmount: total,
+            items: [...cart]
+        };
+        addOrder(newOrder);
+
         cart.forEach(item => {
             if (item.type === 'anime' && item.animeData) {
                 addAnime(item.animeData); 
@@ -49,7 +59,6 @@ export default function CartPage() {
         });
 
         setStep('success');
-        // IMPORTANT: Clear the cart *after* successfully adding to collection
         clearCart();
     }
 
@@ -68,12 +77,17 @@ export default function CartPage() {
                                 <div key={item.id} className={styles.cartItem}>
                                     <Image src={item.image} alt={item.title} width={40} height={40} style={{ borderRadius: '8px' }} />
                                     <span className={styles.cartItemTitle}>{item.title}</span>
-                                    <span className={styles.cartItemPrice}>{item.price} €</span>
+                                    <span className={styles.cartItemPrice}>{parseFloat(item.price).toFixed(2)} €</span>
                                     <button onClick={() => removeFromCart(item.id)} className={styles.cartRemoveBtn}>✕</button>
                                 </div>
                             ))}
                             <div className={styles.cartTotal}>
-                                Total: {total} €
+                                {cart.length >= 5 && (
+                                    <div className={styles.discountMessage}>
+                                        Promotion "4+1 gratuit" appliquée !
+                                    </div>
+                                )}
+                                Total: {total.toFixed(2)} €
                             </div>
                             <form onSubmit={handlePay} className={styles.cartForm}>
                                 <label className={styles.cartLabel}>Choose payment method:</label>
@@ -146,7 +160,7 @@ export default function CartPage() {
                                     </div>
                                 )}
                                 <button type="submit" className={styles.cartPayBtn}>
-                                    Pay {total} €
+                                    Pay {total.toFixed(2)} €
                                 </button>
                             </form>
                             <div className={styles.deliveryDetails}>

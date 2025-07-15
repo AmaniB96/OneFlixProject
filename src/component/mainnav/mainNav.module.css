@@ -77,8 +77,8 @@
 
 .dropdown {
   position: absolute;
-  top: 60px;
-  right: 40px;
+  top: 45px;
+  right: 0px;
   background: #232222;
   border-radius: 8px;
   box-shadow: 0 2px 8px #00000040;

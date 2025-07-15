@@ -1,15 +1,17 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
-export const useCartStore = create((set, get) => ({
-  cart: [], // [{ id, title, image, price }]
-  addToCart: (item) => {
-    
-    const { cart } = get();
-    if (cart.find((p) => p.id === item.id)) return;
-    set({ cart: [...cart, item] });
-  },
-  removeFromCart: (id) => {
-    set({ cart: get().cart.filter((p) => p.id !== id) });
-  },
-  clearCart: () => set({ cart: [] }),
-}));
+export const useCartStore = create(
+  persist(
+    (set) => ({
+      cart: [],
+      addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
+      removeFromCart: (id) => set((state) => ({ cart: state.cart.filter(item => item.id !== id) })),
+      clearCart: () => set({ cart: [] }),
+    }),
+    {
+      name: 'oneflix-cart-storage',
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

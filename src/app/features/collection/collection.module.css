@@ -1,22 +1,29 @@
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
   color: #f1f1f1;
 }
 
 .wrapper h1 {
   font-size: 2.5rem;
-  margin-bottom: 40px;
-  text-align: center;
-  color: #FAC402;
-  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  font-weight: 100;
+  font-family: 'manrope';
 }
+
+.wrapper h1::before{
+  top:0;
+}
+
 
 .collectionGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 25px;
+  margin-bottom: 50px;
 }
 
 .animeCard {
@@ -96,6 +103,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   font-size: 1.2rem;
   line-height: 1.4;
+  margin-bottom: 50px;
 }
 
 /* Responsive adjustments */

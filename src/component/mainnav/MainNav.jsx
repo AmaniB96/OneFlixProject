@@ -6,19 +6,46 @@ import Link from 'next/link'
 import { useAuthStore } from '@/app/stores/authStore'
 import { useState } from 'react'
 import { signOut,useSession } from 'next-auth/react'
-import {useCartStore} from '../../app/stores/cartStore'
+import { useCartStore } from '../../app/stores/cartStore'
+import { useCollectionStore } from '@/app/stores/collectionStore';
+import { calculateDiscountedTotal } from '@/utils/promo'; // 1. Importez la nouvelle fonction
+import { useOrderStore } from '@/app/stores/orderStore'
 
 export default function MainNav() {
-    const { user,logout } = useAuthStore();
+    const { user, logout } = useAuthStore();
     const [open, setOpen] = useState(false);
-    const {data: session} = useSession();
-    const { cart, removeFromCart } = useCartStore();
+    const { data: session } = useSession();
+    const { cart, removeFromCart, clearCart } = useCartStore();
     const [cartOpen, setCartOpen] = useState(false);
+    const clearCollection = useCollectionStore(state => state.clearCollection);
+    const { clearOrders } = useOrderStore();
 
     const username = session?.user?.name || user?.username;
-
     const isAuthenticated = !!session || !!user;
 
+    const handleLogout = async () => {
+        // 1. Clear user-specific data
+        clearCollection();
+        clearCart();
+        clearOrders();
+
+        // 2. Sign the user out
+        await signOut({ callbackUrl: '/' }); // Redirect to home page after logout
+    };
+
+    const handleCustomLogout = () => {
+        // 1. Clear user-specific data
+        clearCollection();
+        clearCart();
+        clearOrders();
+
+        // 2. Log out from custom auth store
+        logout();
+        setOpen(false);
+    };
+
+    // 2. Calculez le total en utilisant la fonction
+    const total = calculateDiscountedTotal(cart);
 
     return (
         <div className={style.MainNav}>
@@ -53,13 +80,23 @@ export default function MainNav() {
                                             <button onClick={() => removeFromCart(item.id)}>✕</button>
                                         </div>
                                     ))}
+
+                                    {/* 3. Affichez un message si la promotion est active */}
+                                    {cart.length >= 5 && (
+                                        <div className={style.discountMessage}>
+                                            Promotion "4+1 gratuit" appliquée !
+                                        </div>
+                                    )}
+
                                     <div className={style.cartTotal}>
                                         <strong>Total: </strong>
-                                        {cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2)} €
+                                        {/* 4. Affichez le total calculé */}
+                                        {total.toFixed(2)} €
                                     </div>
                                     <Link
                                         href='/features/cart'
                                         className={style.checkoutBtn}
+                                        onClick={() => setCartOpen(false)} // Ferme le panier en cliquant
                                     >
                                         Checkout
                                     </Link>
@@ -78,26 +115,20 @@ export default function MainNav() {
                             </span>
                             {open && (
                                 <div className={style.dropdown}>
+                                    {/* Lien vers la page Mon Compte */}
+                                    <Link
+                                        href="/features/myaccount"
+                                        className={style.dropdownBtn}
+                                        onClick={() => setOpen(false)} // Ferme le dropdown au clic
+                                    >
+                                        My Account
+                                    </Link>
+
+                                    {/* Logique de déconnexion existante */}
                                     {session ? (
-                                        <button
-                                            className={style.dropdownBtn}
-                                            onClick={() => {
-                                                signOut();
-                                                setOpen(false);
-                                            }}
-                                        >
-                                            Logout
-                                        </button>
+                                        <button className={style.dropdownBtn} onClick={handleLogout}>Logout</button>
                                     ) : (
-                                        <button
-                                            className={style.dropdownBtn}
-                                            onClick={() => {
-                                                logout();
-                                                setOpen(false);
-                                            }}
-                                        >
-                                            Logout
-                                        </button>
+                                        <button className={style.dropdownBtn} onClick={handleCustomLogout}>Logout</button>
                                     )}
                                 </div>
                             )}

@@ -18,7 +18,7 @@ export default function CollectionPage() {
 
   return (
     <div className={styles.wrapper}>
-      <h1>Your Collection</h1>
+      <h1 className='sectionTitle'>Your Collection</h1>
       <div className={styles.collectionGrid}>
         {Object.values(collection).map(({ anime, episodes }) => (
           <div key={anime.mal_id} className={styles.animeCard}>
