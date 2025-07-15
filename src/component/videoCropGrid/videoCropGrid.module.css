@@ -76,3 +76,75 @@
   transform: translateX(-100px);
   transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+@media screen and (max-width: 1200px) {
+  .MainDiv {
+    margin-left: 50px;
+    width: 90%;
+  }
+  
+  .videoWrapper {
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .MainDiv {
+    margin-left: 30px;
+    height: 65vh;
+  }
+  
+  .videoCropContainer {
+    gap: 20px;
+  }
+  
+  .videoWrapper {
+    width: 180px;
+  }
+  
+  .videoWrapper:hover .videoCrop {
+    width: 800px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .MainDiv {
+    margin-left: 15px;
+    height: 50vh;
+    flex-direction: column;
+    clip-path: none;
+  }
+  
+  .videoCropContainer {
+    width: 100%;
+    height: 80%;
+    overflow-x: scroll;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 0 15px;
+  }
+  
+  .videoWrapper {
+    width: 150px;
+    min-width: 150px;
+  }
+  
+  .videoWrapper:hover .videoCrop {
+    width: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: rotate(0deg) !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .videoCropContainer {
+    height: 70%;
+    gap: 10px;
+  }
+  
+  .videoWrapper {
+    width: 120px;
+    min-width: 120px;
+  }
+}

@@ -17,3 +17,35 @@
     color: #FAC402;
     font-weight: 100;
 }
+
+/* Ajouter à la fin du fichier */
+
+@media screen and (max-width: 1024px) {
+  .heroText {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .heroText {
+    width: 80%;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .heroText h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heroText {
+    width: 95%;
+  }
+  
+  .heroText h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+}

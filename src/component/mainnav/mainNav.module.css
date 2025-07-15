@@ -181,3 +181,56 @@
   background: #ffd700;
   color: #18181f;
 }
+
+@media screen and (max-width: 1024px) {
+  .MainNav {
+    width: 90vw;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .MainNav {
+    width: 95vw;
+    top: 10px;
+    height: 60px;
+    padding: 0 15px;
+  }
+  
+  .logoText {
+    font-size: 1.2rem;
+  }
+  
+  .logoOne {
+    height: 38px;
+    width: 38px;
+  }
+  
+  .logoDiv {
+    gap: 10px;
+  }
+  
+  .cartPreview {
+    width: 260px;
+    right: -10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .MainNav {
+    padding: 0 10px;
+  }
+  
+  .btn {
+    padding: 5px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .logoText {
+    font-size: 1.1rem;
+  }
+  
+  .cartPreview {
+    width: 230px;
+  }
+}

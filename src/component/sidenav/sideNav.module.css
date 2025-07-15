@@ -1,29 +1,93 @@
-.SideNav{
+.SideNav {
     position: fixed;
-    left: 10px;
-    top:130px;
     background-color: #232222;
-    height: 75vh;
-    padding: 25px;
-    border-radius: 10px;
-    padding-top: 150px;
-    padding-bottom: 150px;
+    z-index: 10000;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10000;
+    border-radius: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+
+    /* Style pour grand écran (side nav) */
+    left: 10px;
+    top: 130px;
+    height: 75vh;
+    width: auto;
+    padding: 25px;
+    flex-direction: column;
 }
 
-.NavIcon{
+.NavIcon {
     display: flex;
+    gap: 50px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    /* Style pour grand écran */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
 }
 
 .icon {
     scale: 1.5;
     color: #B3B3B3;
+    transition: color 0.3s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon:hover {
+    color: #FAC402;
+    transform: scale(1.15);
+}
+
+.activeIcon {
+    scale: 1.5;
+    color: #FAC402;
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconLabel {
+    display: none;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .SideNav {
+        /* Nouvelle position en bas pour mobile */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .NavIcon {
+        /* En ligne pour mobile */
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        gap: 0;
+    }
+
+    .icon, .activeIcon {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .iconLabel {
+        display: block; /* Afficher les étiquettes en mode mobile */
+    }
 }

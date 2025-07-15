@@ -114,3 +114,72 @@
 .watchBtn:hover {
     background: #ffe066;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .latestSection {
+    padding-left: 30px;
+  }
+  
+  .latestCard {
+    height: 450px;
+    width: 250px;
+    margin-left: -80px;
+  }
+  
+  .latestCardDisplay {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .latestSection {
+    padding-left: 15px;
+    margin-bottom: 50px;
+  }
+  
+  .latestCard {
+    height: 350px;
+    width: 200px;
+    margin-left: -40px;
+  }
+  
+  .latestCard:hover {
+    width: 200px;
+  }
+  
+  .rank {
+    font-size: 25px;
+  }
+  
+  .hoverContent {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .latestCard {
+    height: 300px;
+    width: 150px;
+    margin-left: -30px;
+  }
+  
+  .latestCard:first-child {
+    margin-left: 0;
+  }
+  
+  .rank {
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .watchBtn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .hoverContent {
+    padding: 10px;
+  }
+}
