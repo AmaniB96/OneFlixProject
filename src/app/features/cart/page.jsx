@@ -9,6 +9,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { useSession } from 'next-auth/react';
 import { useCollectionStore } from '../../stores/collectionStore';
 import { useOrderStore } from '../../stores/orderStore';
+import { useBalanceStore } from '../../stores/balanceStore'; // Importer le store du solde
 import { calculateDiscountedTotal } from '../../../utils/promo';
 
 function getCardType(number) {
@@ -22,9 +23,12 @@ export default function CartPage() {
     const { cart, removeFromCart, clearCart } = useCartStore();
     const { addAnime, addEpisode } = useCollectionStore();
     const { addOrder } = useOrderStore();
+    const { balance, deductBalance } = useBalanceStore(); // Récupérer le solde et la fonction de déduction
     const [step, setStep] = useState('cart');
     const [paymentInfo, setPaymentInfo] = useState({ name: '', card: '', email: '', method: 'card' });
+    const [paymentMethod, setPaymentMethod] = useState('card'); // 'card' ou 'balance'
     const total = calculateDiscountedTotal(cart);
+    const canPayWithBalance = balance >= total;
 
     // Auth logic
     const { user } = useAuthStore();
@@ -41,7 +45,16 @@ export default function CartPage() {
 
     function handlePay(e) {
         e.preventDefault();
-        
+
+        if (paymentMethod === 'balance') {
+            if (!canPayWithBalance) {
+                alert("Your balance is insufficient for this purchase.");
+                return;
+            }
+            // Déduire le montant du solde
+            deductBalance(total);
+        }
+
         const newOrder = {
             id: `order-${Date.now()}`,
             date: new Date().toISOString(),
@@ -90,28 +103,20 @@ export default function CartPage() {
                                 Total: {total.toFixed(2)} €
                             </div>
                             <form onSubmit={handlePay} className={styles.cartForm}>
-                                <label className={styles.cartLabel}>Choose payment method:</label>
-                                <div className={styles.paymentMethods}>
+                                {/* Sélecteur de méthode de paiement */}
+                                <div className={styles.paymentMethodSelector}>
                                     <label>
-                                        <input
-                                            type="radio"
-                                            name="method"
-                                            value="card"
-                                            checked={paymentInfo.method === 'card'}
-                                            onChange={e => setPaymentInfo({ ...paymentInfo, method: e.target.value })}
-                                        /> Credit Card
+                                        <input type="radio" name="paymentMethod" value="card" checked={paymentMethod === 'card'} onChange={() => setPaymentMethod('card')} />
+                                        Pay with Credit Card
                                     </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="method"
-                                            value="paypal"
-                                            checked={paymentInfo.method === 'paypal'}
-                                            onChange={e => setPaymentInfo({ ...paymentInfo, method: e.target.value })}
-                                        /> PayPal
+                                    <label className={!canPayWithBalance ? styles.disabled : ''}>
+                                        <input type="radio" name="paymentMethod" value="balance" checked={paymentMethod === 'balance'} onChange={() => setPaymentMethod('balance')} disabled={!canPayWithBalance} />
+                                        Pay with Balance ({balance.toFixed(2)} €)
                                     </label>
                                 </div>
-                                {paymentInfo.method === 'card' && (
+
+                                {/* Afficher les champs de la carte uniquement si cette méthode est sélectionnée */}
+                                {paymentMethod === 'card' && (
                                     <>
                                         <input
                                             type="text"
@@ -144,7 +149,7 @@ export default function CartPage() {
                                         )}
                                     </>
                                 )}
-                                {paymentInfo.method === 'paypal' && (
+                                {paymentMethod === 'paypal' && (
                                     <div className={styles.paypalMock}>
                                         <p style={{ color: '#FAC402', marginBottom: 8 }}>
                                             You will be redirected to PayPal .

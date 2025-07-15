@@ -9,7 +9,8 @@ import { signOut,useSession } from 'next-auth/react'
 import { useCartStore } from '../../app/stores/cartStore'
 import { useCollectionStore } from '@/app/stores/collectionStore';
 import { calculateDiscountedTotal } from '@/utils/promo'; // 1. Importez la nouvelle fonction
-import { useOrderStore } from '@/app/stores/orderStore'
+import { useOrderStore } from '@/app/stores/orderStore';
+import { useBalanceStore } from '@/app/stores/balanceStore'; // Importer le store du solde
 
 export default function MainNav() {
     const { user, logout } = useAuthStore();
@@ -19,6 +20,7 @@ export default function MainNav() {
     const [cartOpen, setCartOpen] = useState(false);
     const clearCollection = useCollectionStore(state => state.clearCollection);
     const { clearOrders } = useOrderStore();
+    const { clearBalance } = useBalanceStore(); // Récupérer la fonction
 
     const username = session?.user?.name || user?.username;
     const isAuthenticated = !!session || !!user;
@@ -28,6 +30,7 @@ export default function MainNav() {
         clearCollection();
         clearCart();
         clearOrders();
+        clearBalance(); // Vider le solde
 
         // 2. Sign the user out
         await signOut({ callbackUrl: '/' }); // Redirect to home page after logout
@@ -38,6 +41,7 @@ export default function MainNav() {
         clearCollection();
         clearCart();
         clearOrders();
+        clearBalance(); //
 
         // 2. Log out from custom auth store
         logout();
