@@ -155,3 +155,53 @@
   color: #888;
   text-decoration: line-through;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 230px;
+  }
+  
+  .cardTitle {
+    font-size: 0.9rem;
+  }
+  
+  .cardMeta {
+    font-size: 0.75rem;
+  }
+  
+  .tag {
+    font-size: 0.65rem;
+  }
+  
+  .cardFooter {
+    padding: 10px;
+  }
+  
+  .currentPrice {
+    font-size: 1rem;
+  }
+  
+  .originalPrice {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .promoBadge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}

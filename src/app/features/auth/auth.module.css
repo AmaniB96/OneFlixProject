@@ -98,3 +98,39 @@
 .formBox div {
   text-align: center;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .formBox {
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .splitContainer {
+    flex-direction: column;
+  }
+  
+  .leftSide {
+    display: none; /* Cache le côté gauche avec la vidéo sur mobile */
+  }
+  
+  .rightSide {
+    padding: 40px 0;
+  }
+  
+  .formBox {
+    width: 90%;
+    max-width: 320px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .formBox {
+    padding: 30px 20px;
+  }
+  
+  .formBox h2 {
+    font-size: 1.8rem;
+  }
+}

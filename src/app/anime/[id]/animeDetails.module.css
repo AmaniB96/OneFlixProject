@@ -341,3 +341,113 @@
   display: block;
   margin-top: 2px;
 }
+
+
+@media screen and (max-width: 1200px) {
+  .heroDetails {
+    padding: 0 20px;
+    gap: 30px;
+  }
+  
+  .coverImage {
+    width: 300px;
+    height: 450px;
+  }
+  
+  .additionalInfo, .episodesSection {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detailsSection {
+    padding-top: 100px;
+  }
+  
+  .heroDetails {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .coverImage {
+    width: 250px;
+    height: 370px;
+  }
+  
+  .heroText {
+    height: auto;
+    padding-bottom: 0;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .meta, .score, .genres {
+    justify-content: center;
+  }
+  
+  .additionalInfo, .episodesSection {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 40px;
+  }
+  
+  .episodesList {
+    padding: 0 15px;
+  }
+  
+  .episodeCard {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .coverImage {
+    width: 200px;
+    height: 300px;
+  }
+  
+  .heroText {
+    padding: 0 15px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .meta {
+    font-size: 0.9rem;
+  }
+  
+  .genre {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+  }
+  
+  .episodeCard {
+    width: 100%;
+  }
+  
+  .charactersList {
+    padding: 0 10px;
+  }
+  
+  .characterCard {
+    width: 100%;
+  }
+  
+  .episodeTitle {
+    font-size: 0.9rem;
+  }
+  
+  .tab, .tabActive {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}

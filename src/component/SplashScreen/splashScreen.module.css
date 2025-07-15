@@ -204,3 +204,40 @@
     transform: translateY(30px) rotate(3deg);
   }
 }
+
+/* Ajouter à la fin du fichier */
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+  
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .loader {
+    margin-top: 20px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loader {
+    width: 30px;
+    height: 30px;
+  }
+}
