@@ -1,110 +1,97 @@
-import { create } from "zustand"
+import { create } from "zustand";
+import { generateDeterministicPrice } from '@/utils/pricing';
 
+// Plus besoin de drapeau `hasFetched` car chaque action peut déclencher un fetch.
 
 export const useFilterStore = create((set, get) => ({
+    // --- ÉTAT ---
     categories: [],
-    fetchCategories: async () => {
-        const res = await fetch('https://api.jikan.moe/v4/genres/anime', {
-        next: { revalidate: 3600 }});
-        const data = await res.json()
-
-        const Filteredcategories = data.data.filter(genre => !['Hentai','Ecchi','Erotica','Adult Cast'].includes(genre.name))
-
-        set({categories: Filteredcategories})},
-
-    selectedGenre: null,
-    setSelectedGenre: (genre) => set({ selectedGenre: genre, animeList: [] }),
-
+    animeList: [], // La seule liste, directement issue de l'API.
     isLoading: false,
-    setIsLoading: (loading) => set({ isLoading: loading }),
-
-    
-
-    animeList: [],
-    fetchAnimeByGenre: async (genreId) => {
-        const res = await fetch('https://api.jikan.moe/v4/top/anime?limit=25', {
-            next: { revalidate: 3600 }
-        });
-        const data = await res.json();
-        let filtered = (data.data || [])
-            .filter(anime => anime.score);
-
-        if (genreId && genreId !== 'All') {
-            filtered = filtered.filter(anime =>
-                anime.genres.some(g => g.mal_id === Number(genreId))
-            );
-        }
-
-        const unique = [];
-        const seen = new Set();
-        for (const anime of filtered) {
-            if (!seen.has(anime.mal_id)) {
-                seen.add(anime.mal_id);
-                unique.push(anime);
-            }
-        }
-
-        const sorted = unique.sort((a, b) => b.score - a.score).slice(0, 15);
-        set({ animeList: sorted });
-        
-
-    },
-    currentPage: 1,
-    setCurrentPage: (page) => set({ currentPage: page }),
-    sortBy: 'score', 
-    setSortBy: (sort) => set({ sortBy: sort }),
+    selectedGenre: null,
     searchQuery: '',
-    setSearchQuery: (query) => set({ searchQuery: query }),
+    sortBy: 'score', // Attention: le tri est maintenant géré par l'API.
+    pagination: null, // Pour stocker les infos de pagination de l'API.
 
-    fetchDiscoverAnime: async () => {
-        set({ isLoading: true });
-        const { selectedGenre, currentPage, sortBy, searchQuery } = get();
-        let url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=25`;
+    // --- ACTIONS ---
 
-        if (searchQuery && searchQuery.trim() !== '') {
-            url += `&q=${encodeURIComponent(searchQuery.trim())}`;
-        }
-        if (selectedGenre && selectedGenre !== 'All') {
-            url += `&genres=${selectedGenre}`;
-        }
-        if (sortBy) {
-            url += `&order_by=${sortBy}&sort=desc`;
-        }
-
-        const res = await fetch(url, { next: { revalidate: 3600 } });
+    fetchCategories: async () => {
+        const res = await fetch('https://api.jikan.moe/v4/genres/anime');
         const data = await res.json();
+        const filteredCategories = data.data.filter(genre => !['Hentai', 'Ecchi', 'Erotica', 'Adult Cast'].includes(genre.name));
+        set({ categories: filteredCategories });
+    },
 
-        const adultRatings = ['Rx', 'R+', 'R', 'R - 17+', 'R+ - Mild Nudity', 'Rx - Hentai'];
-        const adultGenres = ['Hentai', 'Ecchi', 'Erotica', 'Adult Cast'];
+    /**
+     * Fonction principale qui recherche les animes en fonction de l'état actuel du store.
+     * Elle est appelée à chaque changement de filtre, de recherche, de tri ou de page.
+     */
+    searchAnimes: async (page = 1) => {
+        set({ isLoading: true });
+        const { searchQuery, selectedGenre, sortBy } = get();
 
-        const unique = [];
-        const seen = new Set();
-        for (const anime of data.data || []) {
-            const hasAdultGenre = anime.genres?.some(g => adultGenres.includes(g.name));
-            const isAdultRating = adultRatings.includes(anime.rating);
-            if (!seen.has(anime.mal_id) && !hasAdultGenre && !isAdultRating) {
-                seen.add(anime.mal_id);
-                unique.push(anime);
-            }
+        const params = new URLSearchParams({
+            page: page,
+            limit: 20,
+            order_by: sortBy,
+            sort: 'desc',
+        });
+
+        if (searchQuery) {
+            params.append('q', searchQuery);
+        }
+        // Ne pas ajouter le genre si c'est "All" ou null
+        if (selectedGenre && selectedGenre !== 'All') {
+            params.append('genres', selectedGenre);
         }
 
-        set({
-            animeList: unique.map(anime => {
-                // Generate base price between 5 and 30
-                const base = Math.floor(Math.random() * 26) + 5;
-                // Pick a realistic ending
-                const endings = [0.95, 0.99, 0.00];
-                const ending = endings[Math.floor(Math.random() * endings.length)];
-                // Compose the price
-                const price = (base + ending).toFixed(2);
-                return {
-                    ...anime,
-                    price
-                };
-            }),
-            lastPage: data.pagination?.last_visible_page || 1,
-            isLoading: false
-        });
+        const url = `https://api.jikan.moe/v4/anime?${params.toString()}`;
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (!res.ok || !Array.isArray(data.data)) {
+                throw new Error(`API call failed. URL: ${url}. Response: ${JSON.stringify(data)}`);
+            }
+
+            // Ajoute le prix et filtre les doublons
+            const preparedList = data.data.map(anime => ({
+                ...anime,
+                price: generateDeterministicPrice(anime.mal_id)
+            }));
+            const uniqueList = [...new Map(preparedList.map(anime => [anime.mal_id, anime])).values()];
+
+            set({
+                animeList: uniqueList,
+                pagination: data.pagination,
+                isLoading: false
+            });
+
+        } catch (error) {
+            console.error("Failed to search animes:", error);
+            set({ isLoading: false, animeList: [] });
+        }
     },
-    lastPage: 1,
-}))
+
+    // --- SETTERS (qui déclenchent une nouvelle recherche) ---
+
+    setSelectedGenre: (genreId) => {
+        set({ selectedGenre: genreId });
+        get().searchAnimes(); // On relance une recherche avec le nouveau genre.
+    },
+
+    setSearchQuery: (query) => {
+        set({ searchQuery: query });
+        get().searchAnimes(); // On relance une recherche.
+    },
+
+    setSortBy: (sortOption) => {
+        set({ sortBy: sortOption });
+        get().searchAnimes(); // On relance une recherche avec le nouveau tri.
+    },
+    
+    // Pour la pagination
+    goToPage: (page) => {
+        get().searchAnimes(page);
+    }
+}));

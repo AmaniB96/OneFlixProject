@@ -16,12 +16,7 @@ export default function FilterHeader() {
 
     }, [])
 
-    useEffect(() => {
-        if (categories.length > 0) {
-            fetchAnimeByGenre('All')
-            setSelectedGenre('All')
-        }
-    }, [categories, fetchAnimeByGenre, setSelectedGenre])
+    
 
   const handleGenre = (genreId) => {
     setSelectedGenre(genreId)

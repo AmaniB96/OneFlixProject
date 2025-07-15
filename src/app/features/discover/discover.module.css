@@ -92,6 +92,7 @@
   gap: 24px;
   margin-bottom: 40px;
   padding-right: 80px;
+  margin-top: 50px;
 }
 
 .animeCard {
@@ -176,4 +177,24 @@
     margin-top: 8px;
     cursor: pointer;
     transition: background 0.18s;
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.animeGrid {
+  position: relative;
+}
+
+.cardOverlay{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

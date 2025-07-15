@@ -6,15 +6,23 @@ import { useCartStore } from '../../stores/cartStore';
 import { useEpisodeStore } from '../../stores/episodeStore';
 import { useState, useEffect } from 'react';
 import EpisodesAndCharacters from './EpisodesAndCharacters';
+import { useSearchParams } from 'next/navigation';
 
 
 
 export default function AnimeDetails({ anime }) {
-
-    const trailerId = anime.trailer?.youtube_id;    
-
+    
+     // Étape 1: Appeler les hooks à l'intérieur du composant
+    const searchParams = useSearchParams();
     const { addToCart } = useCartStore();
     const { episodes, fetchEpisodes } = useEpisodeStore();
+
+    // Étape 2: Déplacer la logique de prix ici
+    const priceFromQuery = searchParams.get('price');
+    // On prend le prix de l'objet anime, OU de l'URL, OU une valeur par défaut si aucun n'existe
+    const price = anime.price ?? priceFromQuery ?? 'N/A'; 
+
+    const trailerId = anime.trailer?.youtube_id;
     const [currentPage, setCurrentPage] = useState(1);
     const episodesPerPage = 20;
     const totalPages = Math.ceil(episodes.length / episodesPerPage);
@@ -68,9 +76,18 @@ export default function AnimeDetails({ anime }) {
                             </span>
                         ))}
                     </div>
-                    <div className={styles.price}>{anime.price} €</div>
+                    <div className={styles.price}>{price} €</div>
                     
-                        <button onClick={() => addToCart({id: anime.mal_id, title: anime.title, image: anime.images.jpg.large_image_url, price: anime.price})} style={{width:'170px'}} href={anime.trailer.url} target="_blank" rel="noopener noreferrer"className={styles.trailerLink}>
+                        <button 
+                            onClick={() => addToCart({
+                                id: anime.mal_id, 
+                                title: anime.title, 
+                                image: anime.images.jpg.large_image_url, 
+                                price: price 
+                            })} 
+                            style={{width:'170px'}} 
+                            className={styles.trailerLink}
+                        >
                             Add to cart +
                         </button>
                 
