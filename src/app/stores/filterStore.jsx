@@ -1,15 +1,13 @@
 import { create } from "zustand";
-// 1. Importer les deux fonctions de pricing
 import { generateDeterministicPrice, generateRandomDiscount } from '@/utils/pricing';
 
-// Plus besoin de drapeau `hasFetched` car chaque action peut déclencher un fetch.
 
 export const useFilterStore = create((set, get) => ({
     // --- ÉTAT ---
     categories: [],
     animeList: [], // La seule liste, directement issue de l'API.
     isLoading: false,
-    selectedGenre: null,
+    selectedGenre: 'All',
     searchQuery: '',
     sortBy: 'score', // Attention: le tri est maintenant géré par l'API.
     pagination: null, // Pour stocker les infos de pagination de l'API.

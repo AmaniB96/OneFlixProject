@@ -8,7 +8,6 @@
     border-radius: 10px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 
-    /* Style pour grand écran (side nav) */
     left: 10px;
     top: 130px;
     height: 75vh;
@@ -24,7 +23,6 @@
     margin: 0;
     list-style: none;
 
-    /* Style pour grand écran */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -60,10 +58,8 @@
     text-align: center;
 }
 
-/* Responsive styles */
 @media screen and (max-width: 768px) {
     .SideNav {
-        /* Nouvelle position en bas pour mobile */
         left: 0;
         right: 0;
         bottom: 0;
@@ -72,10 +68,10 @@
         height: auto;
         padding: 15px 10px;
         border-radius: 10px 10px 0 0;
+        padding-top: 35px;
     }
 
     .NavIcon {
-        /* En ligne pour mobile */
         flex-direction: row;
         justify-content: space-around;
         width: 100%;
@@ -88,6 +84,6 @@
     }
 
     .iconLabel {
-        display: block; /* Afficher les étiquettes en mode mobile */
+        display: block; 
     }
 }

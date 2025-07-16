@@ -158,6 +158,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .latestSection{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .latestCard {
     height: 300px;
     width: 150px;

@@ -7,7 +7,6 @@ import styles from './discover.module.css';
 import Link from 'next/link';
 
 export default function Discover() {
-  // --- 1. Récupération de l'état et des actions du store ---
   const {
     animeList,
     isLoading,
@@ -24,33 +23,45 @@ export default function Discover() {
     goToPage
   } = useFilterStore();
 
-  // État local uniquement pour le debounce de la recherche
   const [searchInput, setSearchInput] = useState(searchQuery);
 
-  // --- 2. Effets pour charger les données initiales et gérer la recherche ---
 
-  // Charge les catégories et lance la première recherche au montage du composant.
+  // 1. Effet principal qui se déclenche au montage et à chaque changement de filtre
   useEffect(() => {
-    fetchCategories();
-    searchAnimes(); // Lance la recherche initiale avec les paramètres par défaut.
-  }, [fetchCategories, searchAnimes]);
+    // Si les catégories ne sont pas chargées, on les charge d'abord.
+    if (categories.length === 0) {
+      fetchCategories();
+    }
+    // On lance toujours une recherche quand les filtres changent.
+    searchAnimes(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGenre, sortBy, searchQuery]); // Dépendances correctes
 
-  // Gère la recherche avec un délai pour ne pas surcharger l'API à chaque frappe.
+  // 2. Effet pour le debounce de la barre de recherche
   useEffect(() => {
     const handler = setTimeout(() => {
-      // On ne lance la recherche que si le texte a changé.
+      // On met à jour le store seulement si la valeur a changé
       if (searchInput !== searchQuery) {
         setSearchQuery(searchInput);
       }
     }, 500); // Délai de 500ms
+
+    // Nettoyage du timer si le composant est démonté ou si searchInput change
     return () => clearTimeout(handler);
   }, [searchInput, searchQuery, setSearchQuery]);
+
+  // 3. Effet pour synchroniser l'input si le store est modifié ailleurs
+  useEffect(() => {
+    setSearchInput(searchQuery);
+  }, [searchQuery]);
+
+
+  // --- FIN DES CORRECTIONS ---
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Discover Anime</h1>
 
-      {/* --- 3. Contrôles de Filtre, Recherche et Tri --- */}
       <div className={styles.controls}>
         <input
           className={styles.search}
@@ -80,9 +91,12 @@ export default function Discover() {
         ))}
       </div>
 
-      {/* --- 4. Grille des Animes --- */}
       <div className={styles.animeGrid}>
-        {animeList.length > 0 ? (
+        {isLoading ? (
+          <div className={styles.loaderOverlay}>
+            <div className={styles.loading}>Searching...</div>
+          </div>
+        ) : animeList.length > 0 ? (
           animeList.map(anime => (
             <div key={anime.mal_id} className={styles.animeCard}>
               <Image
@@ -104,17 +118,9 @@ export default function Discover() {
         ) : (
           <p className={styles.noResults}>No results found for your query.</p>
         )}
-
-        {/* Loader en overlay, centré sur la grille */}
-        {isLoading && (
-          <div className={styles.loaderOverlay}>
-            <div className={styles.loading}>Searching...</div>
-          </div>
-        )}
       </div>
 
-      {/* --- 5. Contrôles de Pagination (pilotés par l'API) --- */}
-      {pagination && (
+      {pagination && !isLoading && animeList.length > 0 && (
         <div className={styles.pagination}>
           <button 
             disabled={pagination.current_page === 1} 

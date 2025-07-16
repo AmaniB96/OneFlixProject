@@ -171,6 +171,190 @@
   background-color: #e6b100;
 }
 
+.profileSection {
+  background: rgba(35, 34, 34, 0.7);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileHeader h2 {
+  color: #FAC402;
+  margin: 0;
+}
+
+.editButton {
+  background-color: transparent;
+  border: 1px solid #FAC402;
+  color: #FAC402;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.editButton:hover {
+  background-color: rgba(250, 196, 2, 0.1);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+}
+
+.infoRow strong {
+  width: 120px;
+  color: #e0e0e0;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formGroup label {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+
+.notLoggedWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.notLoggedContainer {
+  background: rgba(35, 34, 34, 0.7);
+  border-radius: 12px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.notLoggedContainer h1 {
+  color: #FAC402;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.notLoggedContainer p {
+  color: #e0e0e0;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.loginButton {
+  background-color: #FAC402;
+  color: #232222;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loginButton:hover {
+  background-color: #e0b102;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loadingSpinner {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #FAC402;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media screen and (max-width: 768px) {
+  .notLoggedContainer {
+    padding: 40px 25px;
+  }
+  
+  .notLoggedContainer h1 {
+    font-size: 1.8rem;
+  }
+  
+  .notLoggedContainer p {
+    font-size: 1rem;
+  }
+  
+  .loginButton {
+    padding: 10px 25px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .infoRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .infoRow strong {
+    width: 100%;
+  }
+}
 /* Ajouter à la fin du fichier */
 
 @media screen and (max-width: 1024px) {

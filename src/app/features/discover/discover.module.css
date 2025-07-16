@@ -279,8 +279,9 @@
 
 @media screen and (max-width: 480px) {
   .animeGrid {
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .animeCard {
