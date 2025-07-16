@@ -127,10 +127,11 @@
   font-size: 1.1rem;
   margin: 10px 0 4px 0;
   text-align: center;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
-  width: 90%;
+  width: 80%;
+  font-size: 15px;
 }
 
 .animeCard p {

@@ -11,25 +11,25 @@ export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [hoveredCharId, setHoveredCharId] = useState(null);
 
-    // --- CORRECTION 1 : Passer l'objet 'anime' complet ---
+    // --- CORRECTION IS HERE ---
+    // We extract the ID to use it as a stable dependency.
+    const animeId = anime.mal_id;
+
     useEffect(() => {
+        // We still pass the full 'anime' object to the function,
+        // but the effect only re-runs if the ID or page changes.
         fetchEpisodes(anime, currentPage);
-    }, [anime, currentPage, fetchEpisodes]);
+    }, [animeId, currentPage, fetchEpisodes]); // Use the stable 'animeId' here
 
     useEffect(() => {
         if (tab === 'characters') {
-            fetchCharacters(anime.mal_id);
+            fetchCharacters(animeId);
         }
-    }, [anime.mal_id, tab, fetchCharacters]);
+    }, [animeId, tab, fetchCharacters]); // Also use the stable 'animeId' here
 
     const EPISODE_PRICE = 1.99;
 
-    const episodesToDisplay = ownedEpisodes 
-        ? episodes.filter(ep => 
-            ownedEpisodes === 'all' || ownedEpisodes.some(ownedEp => ownedEp.mal_id === ep.mal_id)
-          )
-        : episodes;
-
+    const episodesToDisplay = episodes; // We filter later based on ownership
     const isFullAnimeInCart = cart.some(item => item.id === anime.mal_id);
 
     return (
@@ -56,81 +56,64 @@ export default function EpisodesAndCharacters({ anime, ownedEpisodes }) {
                     {isLoadingEpisodes ? (
                         <div style={{ color: "#FAC402", padding: "16px" }}>Loading...</div>
                     ) : (
-                        // --- CORRECTION 2 : Ajouter une vérification sur la longueur de la liste ---
                         episodesToDisplay.length > 0 ? (
-                            <>
-                                <div className={styles.episodesList}>
-                                    {episodesToDisplay.map(ep => {
-                                        const isMovie = anime.type === 'Movie';
-                                        const episodeId = isMovie ? anime.mal_id : `${anime.mal_id}-${ep.mal_id}`;
-                                        const isEpisodeInCart = cart.some(item => item.id === episodeId);
-                                        const isButtonDisabled = isFullAnimeInCart || isEpisodeInCart;
-                                        const cartTitle = isMovie 
-                                            ? anime.title 
-                                            : `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`;
+                            <div className={styles.episodesList}>
+                                {episodesToDisplay.map(ep => {
+                                    const isMovie = anime.type === 'Movie';
+                                    const episodeId = isMovie ? anime.mal_id : `${anime.mal_id}-${ep.mal_id}`;
+                                    
+                                    // --- LOGIC CORRECTION IS HERE ---
+                                    // 1. Check if the specific episode is owned
+                                    const isEpisodeOwned = ownedEpisodes === 'all' || 
+                                        (Array.isArray(ownedEpisodes) && ownedEpisodes.some(ownedEp => ownedEp.mal_id === ep.mal_id));
 
-                                        return (
-                                            <div key={ep.mal_id} className={styles.episodeCard}>
-                                                <span className={styles.episodeNumber}>
-                                                    {isMovie ? 'Movie' : `Ep ${ep.mal_id}`}
-                                                </span>
-                                                <span className={styles.episodeTitle}>{ep.title}</span>
-                                                
-                                                {!ownedEpisodes && (
-                                                    <>
-                                                        <span className={styles.episodePrice}>{EPISODE_PRICE.toFixed(2)} €</span>
-                                                        <button
-                                                            className={styles.episodeAddBtn}
-                                                            disabled={isButtonDisabled}
-                                                            onClick={() => addToCart({
-                                                                id: episodeId, 
-                                                                title: cartTitle,
-                                                                image: anime.images.jpg.large_image_url,
-                                                                price: EPISODE_PRICE,
-                                                                type: isMovie ? 'movie' : 'episode',
-                                                                animeData: anime,
-                                                                episodeData: ep
-                                                            })}
-                                                        >
-                                                            {isFullAnimeInCart ? 'Full Anime in Cart' : isEpisodeInCart ? 'In Cart' : isMovie ? 'Buy Movie' : 'Buy Episode'}
-                                                        </button>
-                                                    </>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                                {/* Cacher la pagination pour les films */}
-                                {anime.type !== 'Movie' && (
-                                    <div className={styles.episodesPagination}>
-                                        <button
-                                            className={styles.pageBtn}
-                                            disabled={currentPage === 1}
-                                            onClick={() => setCurrentPage(currentPage - 1)}
-                                        >
-                                            Prev
-                                        </button>
-                                        {[...Array(lastPage)].map((_, idx) => (
-                                            <button
-                                                key={idx + 1}
-                                                className={currentPage === idx + 1 ? styles.pageBtnActive : styles.pageBtn}
-                                                onClick={() => setCurrentPage(idx + 1)}
-                                            >
-                                                {idx + 1}
-                                            </button>
-                                        ))}
-                                        <button
-                                            className={styles.pageBtn}
-                                            disabled={currentPage === lastPage}
-                                            onClick={() => setCurrentPage(currentPage + 1)}
-                                        >
-                                            Next
-                                        </button>
-                                    </div>
-                                )}
-                            </>
+                                    // 2. Check if it's in the cart (only relevant if not owned)
+                                    const isEpisodeInCart = cart.some(item => item.id === episodeId);
+                                    const isButtonDisabled = isFullAnimeInCart || isEpisodeInCart;
+                                    const cartTitle = isMovie ? anime.title : `${anime.title} - Ep ${ep.mal_id}: ${ep.title}`;
+
+                                    return (
+                                        <div key={ep.mal_id} className={styles.episodeCard}>
+                                            <span className={styles.episodeNumber}>
+                                                {isMovie ? 'Movie' : `Ep ${ep.mal_id}`}
+                                            </span>
+                                            <span className={styles.episodeTitle}>{ep.title}</span>
+                                            
+                                            {/* 3. Use a ternary operator to show Play or Buy */}
+                                            {isEpisodeOwned ? (
+                                                <a 
+                                                    href={ep.url} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className={styles.playBtn}
+                                                >
+                                                    Play
+                                                </a>
+                                            ) : (
+                                                <>
+                                                    <span className={styles.episodePrice}>{EPISODE_PRICE.toFixed(2)} €</span>
+                                                    <button
+                                                        className={styles.episodeAddBtn}
+                                                        disabled={isButtonDisabled}
+                                                        onClick={() => addToCart({
+                                                            id: episodeId, 
+                                                            title: cartTitle,
+                                                            image: anime.images.jpg.large_image_url,
+                                                            price: EPISODE_PRICE,
+                                                            type: isMovie ? 'movie' : 'episode',
+                                                            animeData: anime,
+                                                            episodeData: ep
+                                                        })}
+                                                    >
+                                                        {isFullAnimeInCart ? 'Full Anime in Cart' : isEpisodeInCart ? 'In Cart' : isMovie ? 'Buy Movie' : 'Buy Episode'}
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         ) : (
-                            // Message affiché si la liste est vide après le chargement
                             <div style={{ color: "#FAC402", padding: "16px", textAlign: "center" }}>
                                 No episodes found for this anime.
                             </div>

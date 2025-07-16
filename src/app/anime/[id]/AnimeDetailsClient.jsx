@@ -2,40 +2,34 @@
 
 import Image from 'next/image';
 import styles from './animeDetails.module.css';
-// 1. Importer l'état du panier en plus de la fonction addToCart
 import { useCartStore } from '../../stores/cartStore';
-import { useEpisodeStore } from '../../stores/episodeStore';
-import { useState, useEffect } from 'react';
+// We no longer need useEpisodeStore in this component
+// import { useEpisodeStore } from '../../stores/episodeStore';
+import { useState } from 'react'; // useEffect is no longer needed here
 import EpisodesAndCharacters from './EpisodesAndCharacters';
 import { useSearchParams } from 'next/navigation';
 
-
-
 export default function AnimeDetails({ anime }) {
     
-     // Étape 1: Appeler les hooks à l'intérieur du composant
     const searchParams = useSearchParams();
-    // 2. Récupérer le panier complet et la fonction
     const { cart, addToCart } = useCartStore();
-    const { episodes, fetchEpisodes } = useEpisodeStore();
+    // This is no longer needed here
+    // const { episodes, fetchEpisodes } = useEpisodeStore();
 
-    // Étape 2: Déplacer la logique de prix ici
     const priceFromQuery = searchParams.get('price');
-    // On prend le prix de l'objet anime, OU de l'URL, OU une valeur par défaut si aucun n'existe
     const price = anime.price ?? priceFromQuery ?? 'N/A'; 
 
-    // 3. Vérifier si l'article est déjà dans le panier
     const isInCart = cart.some(item => item.id === anime.mal_id);
-
     const trailerId = anime.trailer?.youtube_id;
-    const [currentPage, setCurrentPage] = useState(1);
-    const episodesPerPage = 20;
-    const totalPages = Math.ceil(episodes.length / episodesPerPage);
 
- 
+    // --- CORRECTION: REMOVE THE USEEFFECT ---
+    // This useEffect was causing a race condition with the one in EpisodesAndCharacters.
+    // The fetching logic now lives entirely within the child component.
+    /*
     useEffect(() => {
-    fetchEpisodes(anime.mal_id, currentPage);
+        fetchEpisodes(anime.mal_id, currentPage);
     }, [anime.mal_id, currentPage, fetchEpisodes]);
+    */
 
     return (
         <section className={styles.detailsSection}>
@@ -115,6 +109,7 @@ export default function AnimeDetails({ anime }) {
                     </div>
         </div> 
         
+         {/* This component is now solely responsible for fetching and displaying episodes */}
          <EpisodesAndCharacters anime={anime} />
         </section>
     );

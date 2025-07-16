@@ -209,6 +209,10 @@
   align-items: flex-start;
   font-size: 1rem;
   box-shadow: 0 1px 6px #00000020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .episodeNumber {
@@ -340,6 +344,26 @@
   color: #e0e0e0;
   display: block;
   margin-top: 2px;
+}
+
+
+.playBtn {
+  background: #FAC402;
+  color: #232222;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none; /* Important for <a> tags */
+  display: inline-block;
+}
+
+.playBtn:hover {
+  background: #ffd700;
+  transform: translateY(-1px);
 }
 
 
