@@ -64,10 +64,18 @@
 }
 
 .featuredContent {
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-    right: 30px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 30px;
+  background: linear-gradient(to top, 
+    rgba(0,0,0,0.9) 0%, 
+    rgba(0,0,0,0.7) 30%, 
+    rgba(0,0,0,0.5) 60%, 
+    rgba(0,0,0,0.2) 85%, 
+    rgba(0,0,0,0) 100%);
+  padding: 50px 15px 15px 15px;
+  width: 100%;
 }
 
 .featuredTitle {
@@ -75,11 +83,13 @@
     font-weight: 600;
     margin-bottom: 10px;
     color: #ffffff;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.8);
 }
 
 .featuredMeta {
-    color: rgba(255, 255, 255, 0.8);
+    color: #FAC402;
     font-size: 14px;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
 }
 
 .cardImage {
@@ -139,6 +149,9 @@
   align-items: center;
   height: 19%;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
 }
 
 .yuyu{
@@ -235,14 +248,15 @@ color: #fff;
   }
   
   .featuredContent {
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
+    padding: 40px 12px 12px 12px;
   }
   
   .featuredTitle {
-    font-size: 20px;
-    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+  
+  .featuredMeta {
+    font-size: 0.75rem;
   }
   
   .AllTimeBest {

@@ -136,3 +136,36 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .description{
+    margin-bottom: 20px;
+    width: 150%;
+  }
+
+  .btnDiv {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .buyButton {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    flex-basis: auto;
+    min-width: 120px;
+  }
+  
+  .rate {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .addBtn {
+    height: 28px;
+    width: 28px;
+    border-width: 2.5px;
+  }
+}

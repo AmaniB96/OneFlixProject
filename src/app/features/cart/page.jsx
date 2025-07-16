@@ -97,7 +97,7 @@ export default function CartPage() {
                             <div className={styles.cartTotal}>
                                 {cart.length >= 5 && (
                                     <div className={styles.discountMessage}>
-                                        Promotion "4+1 gratuit" appliquée !
+                                        4+1 discount applied !
                                     </div>
                                 )}
                                 Total: {total.toFixed(2)} €

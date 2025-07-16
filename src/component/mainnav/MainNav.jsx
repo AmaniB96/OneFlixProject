@@ -88,7 +88,7 @@ export default function MainNav() {
                                     {/* 3. Affichez un message si la promotion est active */}
                                     {cart.length >= 5 && (
                                         <div className={style.discountMessage}>
-                                            Promotion "4+1 gratuit" appliquée !
+                                            4+1 discount applied !
                                         </div>
                                     )}
 

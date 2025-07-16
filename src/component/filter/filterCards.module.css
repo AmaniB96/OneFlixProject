@@ -175,9 +175,16 @@
   .cardMeta {
     font-size: 0.75rem;
   }
+
+  .cardTags{
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    height: 25px;
+  }
   
   .tag {
     font-size: 0.65rem;
+    white-space: nowrap;
   }
   
   .cardFooter {
