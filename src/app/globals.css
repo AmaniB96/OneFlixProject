@@ -203,13 +203,13 @@ h1 {
   }
   
   .MainDiv {
-    margin-left: 20px;
+    margin-left: 80px;
     width: 95%;
     height: 60vh;
   }
   
   .filterSection, .latestSection, .narutoSection, .Cards, .featured {
-    padding-left: 30px;
+    padding-left: 105px;
   }
 }
 

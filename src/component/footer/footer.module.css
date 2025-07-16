@@ -142,6 +142,9 @@
 }
 
 @media (max-width: 1024px) {
+    .footer{
+        padding-left: 100px;
+    }
     .footerTop {
         flex-wrap: wrap;
         gap: 40px;
@@ -160,6 +163,9 @@
 }
 
 @media (max-width: 768px) {
+    .footer{
+        padding-left: 0;
+    }
     .footerLinks {
         gap: 40px;
         flex-wrap: wrap;
