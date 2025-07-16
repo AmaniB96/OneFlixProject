@@ -54,7 +54,8 @@
   gap: 10px;
   max-height: 80px;
   overflow-x: auto;
-  min-width: 1200px;
+  min-width: 80%;
+  max-width: 100%;
   scrollbar-width: none;
 }
 

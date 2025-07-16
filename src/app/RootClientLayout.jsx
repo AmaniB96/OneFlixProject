@@ -42,6 +42,10 @@ export default function RootClientLayout({ children, geistSans, geistMono }) {
                         },
                     },
                 }}
+                containerStyle={{
+                  top: 100,      
+                  zIndex: 100001 
+                }}
             />
       <MainNav />
       {!hideSideNav && <SideNav />}

@@ -10,6 +10,10 @@ ul{
   box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body{
   background-color: #2E2C2C;
   font-family: "Manrope";
@@ -200,6 +204,10 @@ h1 {
 @media screen and (max-width: 1024px) {
   .sectionTitle, .filterTitle {
     font-size: 36px;
+  }
+
+  .sectionTitle::before{
+    top:0;
   }
   
   .MainDiv {

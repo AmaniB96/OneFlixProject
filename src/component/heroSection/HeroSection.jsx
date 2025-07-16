@@ -9,7 +9,7 @@ export default function HeroSection() {
       <h1>
         Every single animes you ever needed, in <span>ONE</span> place
       </h1>
-      <button className="btn"><Link href='/features/discover'>Explore</Link></button>
+      <button className="btn"><Link style={{textDecoration:'none', color:'black'}} href='/features/discover'>Explore</Link></button>
     </div>
   );
 }

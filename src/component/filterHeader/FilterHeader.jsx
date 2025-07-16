@@ -37,7 +37,7 @@ export default function FilterHeader() {
   }
 
   return (
-    <div className='filterSection'>
+    <div id='filter' className='filterSection'>
       <div className="filterTitle">
         <h4 className="sectionTitle">Categories</h4>
       </div>

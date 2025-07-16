@@ -13,7 +13,7 @@ export default async function LatestAnime() {
 
     return(
         <>
-            <section className={styles.latestSection}>
+            <section id='latestAnime' className={styles.latestSection}>
                 <div>
                     <div>
                         <h2 className="sectionTitle">Latest Trend</h2>

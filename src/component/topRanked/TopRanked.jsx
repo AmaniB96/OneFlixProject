@@ -20,7 +20,7 @@ export default async function TopRanked() {
     ];
 
     return (
-        <section className={styles.featured}>
+        <section id='topRanked' className={styles.featured}>
             <div className={styles.container}>
                 <h2 className="sectionTitle">Top Ranked</h2>
                 <div className={styles.featuredGrid}>

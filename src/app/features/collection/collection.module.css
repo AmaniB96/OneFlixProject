@@ -106,11 +106,15 @@
   margin-bottom: 50px;
 }
 
+@media (width > 1200px) {
+    .wrapper{
+        padding-left: 80px;
+    }
+}
+
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .wrapper {
-    padding: 20px 15px;
-  }
+@media (max-width: 1024px) {
+ 
   
   .wrapper h1 {
     font-size: 2rem;

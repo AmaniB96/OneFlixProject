@@ -51,7 +51,7 @@ export default function Featured() {
     const price = generateDeterministicPrice(animeId);
     
     return(
-        <div className={styles.Featured} ref={featuredRef}>
+        <div id='featured' className={styles.Featured} ref={featuredRef}>
             <div className={styles.imageWrapper} ref={imageRef}>
                 <Image
                     src="/assets/ds.jpg"

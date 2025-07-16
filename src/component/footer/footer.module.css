@@ -4,14 +4,15 @@
     color: #f0f0f0;
     border-top: 1px solid #333;
     box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.08);
+    padding-left: 150px;
+    padding-right: 50px;
 }
 
 .footerTop {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .footerLogo {
@@ -61,21 +62,42 @@
     color: #f0f0f0;
 }
 
-.newsletter {
-    max-width: 320px;
+/* Newsletter Styles */
+.newsletterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px;
 }
 
-.newsletter h3 {
-    color: #FAC402;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+.newsletterSection h3 {
+  color: #FAC402;
+  margin-bottom: 4px;
 }
 
-.newsletter p {
-    color: #ababab;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
+.newsletterSection p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 8px;
+}
+
+.newsletterInput {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.newsletterInput::placeholder {
+  color: #888;
 }
 
 .subscribe {
@@ -141,6 +163,69 @@
     color: #f0f0f0;
 }
 
+
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* ... existing styles ... */
+
+/* Newsletter Styles */
+.newsletterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px;
+}
+
+.newsletterSection h3 {
+  color: #FAC402;
+  margin-bottom: 4px;
+}
+
+.newsletterSection p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 8px;
+}
+
+.newsletterInput {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.newsletterInput::placeholder {
+  color: #888;
+}
+
+.newsletterButton {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #FAC402;
+  color: #232222;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.newsletterButton:hover {
+  background-color: #ffd700;
+}
+
 @media (max-width: 1024px) {
     .footer{
         padding-left: 100px;
@@ -164,7 +249,7 @@
 
 @media (max-width: 768px) {
     .footer{
-        padding-left: 0;
+        padding-left: 50px;
     }
     .footerLinks {
         gap: 40px;
