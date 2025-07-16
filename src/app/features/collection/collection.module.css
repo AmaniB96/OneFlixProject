@@ -134,3 +134,32 @@
     gap: 8px;
   }
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 15px; /* Add horizontal padding for mobile */
+  }
+
+  .wrapper h1 {
+    font-size: 1.8rem;
+    margin-top: 100px; /* Further reduce top margin for mobile */
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .collectionGrid {
+    /* Adjust grid for better mobile layout */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .cardTitle {
+    font-size: 0.9rem;
+  }
+
+  .empty {
+    font-size: 1rem;
+    padding: 30px 20px;
+    margin-top: 40px;
+  }
+}

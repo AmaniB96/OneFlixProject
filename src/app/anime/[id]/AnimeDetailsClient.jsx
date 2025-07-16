@@ -22,14 +22,10 @@ export default function AnimeDetails({ anime }) {
     const isInCart = cart.some(item => item.id === anime.mal_id);
     const trailerId = anime.trailer?.youtube_id;
 
-    // --- CORRECTION: REMOVE THE USEEFFECT ---
-    // This useEffect was causing a race condition with the one in EpisodesAndCharacters.
-    // The fetching logic now lives entirely within the child component.
-    /*
-    useEffect(() => {
-        fetchEpisodes(anime.mal_id, currentPage);
-    }, [anime.mal_id, currentPage, fetchEpisodes]);
-    */
+    // --- NEW: Logic to shorten the synopsis ---
+    const synopsisText = anime.synopsis || '';
+    const bracketIndex = synopsisText.indexOf('[');
+    const shortSynopsis = bracketIndex !== -1 ? synopsisText.substring(0, bracketIndex).trim() : synopsisText;
 
     return (
         <section className={styles.detailsSection}>
@@ -100,7 +96,8 @@ export default function AnimeDetails({ anime }) {
             </div>
         <div className={styles.additionalInfo}>
             <h3>Synopsis</h3>
-            <p className={styles.synopsis}>{anime.synopsis}</p>
+            {/* Use the shortened synopsis here */}
+            <p className={styles.synopsis}>{shortSynopsis}</p>
             <div className={styles.extraInfo}>
                         <span><strong>Status:</strong> {anime.status}</span>
                         <span><strong>Duration:</strong> {anime.duration}</span>

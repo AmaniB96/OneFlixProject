@@ -371,8 +371,10 @@
   }
   
   .title {
+    margin-top: 70px;
     font-size: 2rem;
     margin-bottom: 30px;
+    margin-left: 0;
   }
   
   .balanceSection {

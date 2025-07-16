@@ -242,6 +242,11 @@
   .title {
     font-size: 28px;
     margin-bottom: 30px;
+    margin-top: 70px;
+  }
+  
+  .title::before {
+    top: -8px;
   }
   
   .search {
