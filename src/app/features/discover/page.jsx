@@ -56,8 +56,6 @@ export default function Discover() {
   }, [searchQuery]);
 
 
-  // --- FIN DES CORRECTIONS ---
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Discover Anime</h1>
