@@ -6,7 +6,7 @@ import SideNav from "../component/sidenav/SideNav";
 import Footer from "../component/footer/Footer"
 import { usePathname } from 'next/navigation'
 import { SessionProvider } from "next-auth/react";
-import { Toaster } from 'react-hot-toast'; // 1. Importer le composant Toaster
+import { Toaster } from 'react-hot-toast'; 
 
 
 
