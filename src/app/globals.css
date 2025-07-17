@@ -205,6 +205,9 @@ h1 {
 
 
 @media screen and (max-width: 1024px) {
+  body{
+    overflow-x: hidden;
+  }
   .sectionTitle, .filterTitle {
     font-size: 36px;
   }
@@ -216,7 +219,9 @@ h1 {
   .MainDiv {
     margin-left: 80px;
     width: 95%;
-    height: 60vh;
+    height: 75vh;
+    width: calc(100% - 45px); 
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
   }
   
   .filterSection, .latestSection, .narutoSection, .Cards, .featured {
@@ -224,18 +229,35 @@ h1 {
   }
 }
 
+@media screen and (max-width: 821px){
+
+  .MainDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35vh;
+  }
+}
+
 @media screen and (max-width: 768px) {
+
   .sectionTitle, .filterTitle {
     font-size: 30px;
   }
   
   .MainDiv {
-    width: 92%;
-    height: 50vh;
+    width: 96%;
+    height: 35vh;
     margin-top: 100px;
     margin-left: 15px;
     flex-direction: column;
     clip-path: none;
+  }
+
+  .MainDiv video,
+  .videoBg,
+  .videoCrop {
+    display: none !important;
   }
   
   .heroText {
@@ -279,6 +301,7 @@ h1 {
   .MainDiv {
     height: auto;
     padding: 20px 0;
+    width: 92%;
   }
   
   .slideCarousel {

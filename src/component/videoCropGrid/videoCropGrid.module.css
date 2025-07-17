@@ -91,20 +91,51 @@
 @media screen and (max-width: 1024px) {
   .MainDiv {
     margin-left: 30px;
-    height: 65vh;
+    margin-right: 15px;
   }
   
   .videoCropContainer {
     gap: 20px;
+    width: 50%;
+    justify-content: flex-end;
+    padding-right: 25px;
   }
   
   .videoWrapper {
     width: 180px;
+    height: 100%;
   }
   
   .videoWrapper:hover .videoCrop {
-    width: 800px !important;
+    width: 500px !important;
+    z-index: 200;
   }
+  
+  .videoWrapper:first-child:hover .videoCrop {
+    left: 0 !important; 
+  }
+
+  .videoWrapper:nth-child(2):hover .videoCrop {
+  left: 50% !important;  /* Position from the middle */
+  transform: translateX(-50%) !important;  /* Center it properly */
+}
+  
+  .videoWrapper:last-child:hover .videoCrop {
+    right: 0 !important;
+    left: auto;
+  }
+  
+
+}
+
+@media screen and (max-width: 820px) {
+  .videoWrapper{
+    display: none;
+  }
+
+ .videoCropContainer{
+  display: none;
+ }
 }
 
 @media screen and (max-width: 768px) {
