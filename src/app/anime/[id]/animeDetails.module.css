@@ -412,6 +412,22 @@
     top: -300px;
   }
   
+  .heroDetails .collectionVideoBg {
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 220px; /* Set desired height */
+  overflow: hidden;
+  }
+  .heroDetails .collectionVideoBg iframe {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  
   .coverImage {
     width: 250px;
     height: 370px;

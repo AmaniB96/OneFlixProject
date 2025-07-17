@@ -3,7 +3,8 @@ import { useEffect, useRef } from 'react'
 import styles from './featured.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import { generateDeterministicPrice } from '@/utils/pricing' // 1. Importer la fonction de prix
+import { generateDeterministicPrice } from '@/utils/pricing'
+
 
 
 export default function Featured() {
@@ -82,7 +83,6 @@ export default function Featured() {
                         Buy Now
                     </Link>
                     <button className={styles.rate}>8.43 <i className="fa-solid fa-star"></i></button>
-                    <button className={styles.addBtn}><i className="fa-solid fa-plus"></i></button>
                 </div>
                 
             </div>

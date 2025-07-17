@@ -2,7 +2,7 @@
 import { useCollectionStore } from '@/app/stores/collectionStore'
 import { useParams } from 'next/navigation'
 import EpisodesAndCharacters from '@/app/anime/[id]/EpisodesAndCharacters'
-import styles from '@/app/anime/[id]/animeDetails.module.css' // Reuse styles
+import styles from '@/app/anime/[id]/animeDetails.module.css'
 import Image from 'next/image'
 
 export default function CollectionAnimeDetailsPage() {
@@ -17,12 +17,15 @@ export default function CollectionAnimeDetailsPage() {
   const { anime, episodes: ownedEpisodes } = entry;
   const trailerId = anime.trailer?.youtube_id;
 
+  const synopsisText = anime.synopsis || '';
+  const bracketIndex = synopsisText.indexOf('[');
+  const shortSynopsis = bracketIndex !== -1 ? synopsisText.substring(0, bracketIndex).trim() : synopsisText;
+
   return (
     <section className={styles.detailsSection}>
-        {/* Replicate the hero section from the main details page */}
         <div className={styles.heroDetails}>
             {trailerId && (
-                <div className={styles.videoBg}>
+                <div className={`${styles.videoBg} ${styles.collectionVideoBg}`} >
                     <iframe
                         src={`https://www.youtube.com/embed/${trailerId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&loop=1&playlist=${trailerId}`}
                         frameBorder="0"
@@ -49,7 +52,7 @@ export default function CollectionAnimeDetailsPage() {
         
         <div className={styles.additionalInfo}>
             <h3>Synopsis</h3>
-            <p className={styles.synopsis}>{anime.synopsis}</p>
+            <p className={styles.synopsis}>{shortSynopsis}</p>
         </div> 
         
         {/* Pass the owned episodes to the component */}
