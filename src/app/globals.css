@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+:root {
+  --font-Manrope: 'Manrope', sans-serif;
+}
 
 ul{
     list-style: none;
@@ -16,7 +19,7 @@ html{
 
 body{
   background-color: #2E2C2C;
-  font-family: "Manrope";
+  font-family: 'Manrope';
   color: white;
 }
 

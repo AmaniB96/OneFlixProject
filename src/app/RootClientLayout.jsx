@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast'; // 1. Importer le composant Toaster
 
 
 
-export default function RootClientLayout({ children, geistSans, geistMono }) {
+export default function RootClientLayout({ children, geistSans, geistMono, geistManrope }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function RootClientLayout({ children, geistSans, geistMono }) {
 
   return (
     <SessionProvider>
-    <body className={`${geistSans} ${geistMono} antialiased`}>
+    <body className={`${geistSans} ${geistMono} ${geistManrope} antialiased`}>
       {loading && <SplashScreen />}
       <Toaster
                 position="top-center"

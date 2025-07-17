@@ -205,13 +205,11 @@
   background: #ffd700;
 }
 
-/* Firefox scrollbar styling */
 .cartPreview {
   scrollbar-width: thin;
   scrollbar-color: #FAC402 #333333;
 }
 
-/* Additional mobile improvements for cart preview */
 @media screen and (max-width: 480px) {
   .cartPreview {
     right: -10px;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import RootClientLayout from "./RootClientLayout";
@@ -11,6 +11,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const geistManrope = Manrope({
+  variable: "--font-Manrope",
   subsets: ["latin"],
 });
 
@@ -29,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="beforeInteractive"
         />
       </head>
-      <RootClientLayout geistSans={geistSans.variable} geistMono={geistMono.variable}>
+      <RootClientLayout geistSans={geistSans.className} geistMono={geistMono.className} geistManrope={geistManrope.className}>
         {children}
       </RootClientLayout>
     </html>
