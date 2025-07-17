@@ -10,7 +10,7 @@ export default async function TopRanked() {
     const data = await res.json()
     const topRanked = data.data?.slice(0,4) || [];
 
-    // On définit la liste des meilleurs animes pour la rendre plus facile à gérer
+    // On définit la liste des meilleurs animes
     const allTimeBest = [
         { id: 392, title: '1. Yu Yu Hakusho', style: 'yuyu' },
         { id: 5114, title: '2. Fullmetal Alchemist: Brotherhood', style: 'fma' },

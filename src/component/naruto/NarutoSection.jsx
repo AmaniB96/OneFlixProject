@@ -35,7 +35,7 @@ export default async function NarutoSection() {
                         <div className={styles.narutoCardDisplay}>
                             {topNaruto1.map((element, index) => {
                                 const imgSrc = narutoImg[index];
-                                const price = generateDeterministicPrice(20); // Use episode mal_id if available, else anime id
+                                const price = generateDeterministicPrice(20); 
                                 return (
                                     <div key={index} className={styles.narutoCard}>
                                     {imgSrc ? (

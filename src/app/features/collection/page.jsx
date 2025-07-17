@@ -2,7 +2,7 @@
 import { useCollectionStore } from '@/app/stores/collectionStore'
 import Link from 'next/link'
 import styles from './collection.module.css'
-import Image from 'next/image' // Import the Image component
+import Image from 'next/image' 
 
 export default function CollectionPage() {
   const collection = useCollectionStore(state => state.collection);

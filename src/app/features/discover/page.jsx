@@ -34,8 +34,7 @@ export default function Discover() {
     }
     // On lance toujours une recherche quand les filtres changent.
     searchAnimes(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGenre, sortBy, searchQuery]); // Dépendances correctes
+  }, [selectedGenre, sortBy, searchQuery]); 
 
   // 2. Effet pour le debounce de la barre de recherche
   useEffect(() => {

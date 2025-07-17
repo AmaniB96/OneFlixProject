@@ -26,29 +26,28 @@ export default function MainNav() {
     const isAuthenticated = !!session || !!user;
 
     const handleLogout = async () => {
-        // 1. Clear user-specific data
+        // 1. Fonctions qui reinitialise tout
         clearCollection();
         clearCart();
         clearOrders();
-        clearBalance(); // Vider le solde
+        clearBalance(); 
 
-        // 2. Sign the user out
-        await signOut({ callbackUrl: '/' }); // Redirect to home page after logout
+        // 2. deconnexion
+        await signOut({ callbackUrl: '/' }); // redirige vers la home page
     };
 
     const handleCustomLogout = () => {
-        // 1. Clear user-specific data
         clearCollection();
         clearCart();
         clearOrders();
         clearBalance(); //
 
-        // 2. Log out from custom auth store
+        
         logout();
         setOpen(false);
     };
 
-    // 2. Calculez le total en utilisant la fonction
+    // 2. Calculez le total en utilisant la fonction qui vient de l'util promo
     const total = calculateDiscountedTotal(cart);
 
     return (

@@ -14,7 +14,7 @@ export default function SplashScreen() {
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            // Audio playback was prevented by the browser's autoplay policy.
+            // Le navigateur va empecher le declenchement automatique
           });
         }
       }

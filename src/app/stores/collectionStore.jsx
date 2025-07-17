@@ -1,13 +1,14 @@
 import { create } from "zustand";
-// 1. Import the persist middleware
+// 1. Importe le middleware de persistance
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-// 2. Wrap your store creator function with the persist middleware
+// 2. Enveloppe la fonction de création du store avec le middleware de persistance
 export const useCollectionStore = create(
   persist(
     (set, get) => ({
       collection: {}, // { [animeId]: { anime, episodes: [episodeObj] } }
 
+      // Ajoute un anime à la collection
       addAnime: (anime) => {
         set(state => ({
           collection: {
@@ -17,9 +18,10 @@ export const useCollectionStore = create(
         }));
       },
 
+      // Ajoute un épisode à la collection pour un anime donné
       addEpisode: (anime, episode) => {
         const current = get().collection[anime.mal_id];
-        // Ensure we don't add duplicates
+        // Vérifie qu'on n'ajoute pas de doublon
         const isOwned = current?.episodes !== 'all' && current?.episodes?.some(e => e.mal_id === episode.mal_id);
         if (isOwned) return;
 
@@ -35,9 +37,10 @@ export const useCollectionStore = create(
         }));
       },
 
-      // Add this function to clear the collection
+      // Fonction pour vider la collection
       clearCollection: () => set({ collection: {} }),
 
+      // Récupère les épisodes possédés pour un anime donné
       getUserEpisodes: (animeId) => {
         const entry = get().collection[animeId];
         if (!entry) return [];
@@ -45,10 +48,10 @@ export const useCollectionStore = create(
         return entry.episodes;
       }
     }),
-    // 3. Configure the persistence
+    // 3. Configure la persistance
     {
-      name: 'oneflix-collection-storage', // name of the item in the storage (must be unique)
-      storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+      name: 'oneflix-collection-storage', // nom de l'item dans le storage (doit être unique)
+      storage: createJSONStorage(() => localStorage), // (optionnel) par défaut, 'localStorage' est utilisé
     }
   )
 );

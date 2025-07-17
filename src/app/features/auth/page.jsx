@@ -15,6 +15,8 @@ export default function Auth() {
     const [password, setPassword] = useState('')
     const { data: session } = useSession();
 
+    //La fonction useSession vient de NextAuth et permet d’accéder à l’état de la session d’authentification dans un composant React.
+
     const router = useRouter();
 
     useEffect(() => {

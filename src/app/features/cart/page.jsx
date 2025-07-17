@@ -30,13 +30,13 @@ export default function CartPage() {
     const total = calculateDiscountedTotal(cart);
     const canPayWithBalance = balance >= total;
 
-    // Auth logic
+    // logique d'auth
     const { user } = useAuthStore();
     const { data: session } = useSession();
     const isAuthenticated = !!session || !!user;
     const router = useRouter();
 
-    // Redirect if not logged in
+   
     useEffect(() => {
         if (!isAuthenticated) {
             router.replace('/features/auth?redirect=/features/cart');

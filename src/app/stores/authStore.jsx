@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware';
 
+// Création du store Zustand avec persistance dans le localStorage
 export const useAuthStore = create(
   persist(
     (set,get) => ({
@@ -10,6 +11,7 @@ export const useAuthStore = create(
         loginError: '',
         registerError:'',
 
+        // Getter pour savoir si un utilisateur est connecté. Dans Zustand, la fonction get permet d’accéder à l’état actuel du store à l’intérieur des méthodes du store.
         get isAuthenticated() {
             return !!get().user;
         },
@@ -26,6 +28,7 @@ export const useAuthStore = create(
 
         register: (username, password) => {
             const {users} = get();
+            // Vérifie si le username existe déjà
             if (users.find(u => u.username === username)) {
                 set({registerError: 'Username already exists'});
                 return;
@@ -43,7 +46,7 @@ export const useAuthStore = create(
         updateUser: (userData) => set({ user: userData }),
     }),
     {
-      name: 'oneflix-auth-storage',
+      name: 'oneflix-auth-storage', // Nom du store dans le localStorage
       storage: createJSONStorage(() => localStorage),
     }
   )

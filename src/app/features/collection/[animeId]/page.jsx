@@ -55,7 +55,7 @@ export default function CollectionAnimeDetailsPage() {
             <p className={styles.synopsis}>{shortSynopsis}</p>
         </div> 
         
-        {/* Pass the owned episodes to the component */}
+        {/* On passe les episodes achetés en props */}
         <EpisodesAndCharacters anime={anime} ownedEpisodes={ownedEpisodes} />
     </section>
   );

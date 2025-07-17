@@ -13,7 +13,7 @@ export const useOrderStore = create(
         }));
       },
 
-      // Optionnel : fonction pour vider l'historique (utile au logout)
+      //fonction pour vider l'historique (utile au logout)
       clearOrders: () => set({ orders: [] }),
     }),
     {
