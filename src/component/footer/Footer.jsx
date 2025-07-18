@@ -48,7 +48,7 @@ export default function Footer() {
                         <Link href="https://www.linkedin.com/in/amani-b-783733190/">Linkedin</Link>
                     </div>
                 </div>
--                <div className={styles.newsletterSection}>
+                <div className={styles.newsletterSection}>
                     <h3>Join Our Newsletter</h3>
                     <p>Get updates on new animes and promotions.</p>
                     <form onSubmit={handleNewsletterSubmit} className={styles.newsletterForm}>
