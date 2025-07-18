@@ -44,12 +44,11 @@ export default function Footer() {
                     </div>
                     <div className={styles.linkColumn}>
                         <h3>Social</h3>
-                        <Link href="">Github</Link>
-                        <Link href="">Linkedin</Link>
+                        <Link href="https://github.com/AmaniB96/OneFlixProject">Github</Link>
+                        <Link href="https://www.linkedin.com/in/amani-b-783733190/">Linkedin</Link>
                     </div>
                 </div>
-                {/* Newsletter Section */}
-                <div className={styles.newsletterSection}>
+-                <div className={styles.newsletterSection}>
                     <h3>Join Our Newsletter</h3>
                     <p>Get updates on new animes and promotions.</p>
                     <form onSubmit={handleNewsletterSubmit} className={styles.newsletterForm}>

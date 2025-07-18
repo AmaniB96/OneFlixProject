@@ -24,6 +24,8 @@ A modern **Video On Demand** web application focused on anime. Discover, search,
 - **React**
 - **Jikan API** (for anime data)
 - **NextAuth** (Google authentication)
+- **Zustand** (State Management)
+- **React-Hot-Toast** (Notifications)
 
 ---
 
