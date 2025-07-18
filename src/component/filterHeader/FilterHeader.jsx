@@ -1,40 +1,46 @@
-'use client'
-import { useEffect } from 'react'
-import { useFilterStore } from '../../app/stores/filterStore'
-import { useRouter } from 'next/navigation' // 1. Importer le router
+'use client';
+
+import { useEffect } from 'react';
+import { useFilterStore } from '../../app/stores/filterStore';
+import { useRouter } from 'next/navigation';
 
 export default function FilterHeader() {
+  const router = useRouter();
   const {
     categories,
     fetchCategories,
     selectedGenre,
-    setSelectedGenre
+    setSelectedGenre,
+    animeList,
+    searchAnimes
   } = useFilterStore();
 
-  const router = useRouter(); // 2. Initialiser le router
-
+  // Cet effet se déclenche une seule fois au montage du composant.
   useEffect(() => {
+    // Si les catégories ne sont pas chargées, on les charge.
     if (categories.length === 0) {
       fetchCategories();
     }
-  }, [categories, fetchCategories]);
+    // Si la liste d'animes est vide, on lance une recherche par défaut.
+    if (animeList.length === 0) {
+      searchAnimes(); // Appelle searchAnimes avec les filtres par défaut.
+    }
+  }, []); // Le tableau vide [] assure que l'effet ne s'exécute qu'une fois.
 
-  // 3. Fonction pour la liste défilante : met juste à jour l'état
+  // Gère le changement de genre
   const handleGenre = (genreId) => {
     setSelectedGenre(genreId);
-  }
+  };
 
-  // 4. Fonction pour le titre principal : met à jour l'état ET redirige
+  // Redirige vers la page de découverte
   const handleGenreRedirect = () => {
-    // Pas besoin de passer l'ID, on utilise celui déjà dans le store
     router.push('/features/discover');
-  }
-  
-  let activeCategoryName = 'All';
-  if (selectedGenre && selectedGenre !== 'All') {
-    const activeCat = categories.find(cat => cat.mal_id === selectedGenre);
-    if (activeCat) activeCategoryName = activeCat.name;
-  }
+  };
+
+  // Trouve le nom de la catégorie active
+  const activeCategoryName = selectedGenre === 'All' || !selectedGenre
+    ? 'All'
+    : categories.find(c => c.mal_id === selectedGenre)?.name || 'All';
 
   return (
     <div id='filter' className='filterSection'>
